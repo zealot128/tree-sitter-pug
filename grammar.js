@@ -8,7 +8,7 @@ module.exports = grammar({
   rules: {
     source_file: $ => repeat(choice($.comment, $.tag)),
     tag: $ => seq(
-      $.tag_name,
+      choice($.tag_name, $.id, $.class),
       optional(repeat(choice($.id, $.class))),
       optional($.attributes),
       optional(seq(' ', $.content)),
