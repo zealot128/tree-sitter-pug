@@ -1,0 +1,152 @@
+============
+Tag
+============
+
+some-tag
+
+---
+
+(source_file
+  (tag
+    (tag_name)))
+
+
+========================
+Tag with classes
+========================
+
+some-tag.some-class.other-class
+
+---
+
+(source_file
+  (tag
+    (tag_name)
+    (class)
+    (class)))
+
+========================
+Tag with id
+========================
+
+some-tag#some-id
+
+---
+
+(source_file
+  (tag
+    (tag_name)
+    (id)))
+
+========================
+Tag with attributes
+========================
+
+some-tag(attr, other-attr="test")
+
+---
+
+(source_file
+  (tag
+    (tag_name)
+    (attributes
+      (attribute (attribute_name))
+      (attribute (attribute_name) (quoted_attribute_value (attribute_value))))))
+
+========================
+Tag with content
+=========================
+
+some-tag(attr) content
+
+---
+
+(source_file
+  (tag
+    (tag_name)
+    (attributes
+      (attribute (attribute_name)))
+    (content)))
+
+========================
+Comment
+========================
+
+// Some comment that is
+
+---
+
+(source_file
+  (comment))
+
+
+========================
+Multiline comment
+========================
+
+// Some comment
+  with nested line that
+  are still commented
+
+---
+
+(source_file
+  (comment))
+
+========================
+Tag with children
+========================
+
+some-tag
+  child-one content
+  child-two(attr)
+
+---
+
+(source_file
+  (tag
+    (tag_name)
+    (children
+      (tag
+        (tag_name)
+        (content))
+      (tag
+        (tag_name)
+        (attributes
+          (attribute (attribute_name)))))))
+
+
+========================
+Mixed example
+========================
+
+// some comment
+some-tag.class-one(attr) the content
+  sub-tag.some-slass
+    sub-sub-tag content
+  other-subtag#with-id.and-class(and-attr)
+
+---
+
+(source_file
+  (comment)
+  (tag
+    (tag_name)
+    (class)
+    (attributes
+      (attribute (attribute_name)))
+    (content)
+    (children
+      (tag
+        (tag_name)
+        (class)
+        (children
+          (tag
+            (tag_name)
+            (content))))
+      (tag
+        (tag_name)
+        (id)
+        (class)
+        (attributes
+          (attribute (attribute_name)))))))
