@@ -2,3 +2,5 @@ node_modules/
 bindings/
 build/
 pug.so
+src/parser.c
+src/grammar.json

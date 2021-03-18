@@ -38,7 +38,7 @@ module.exports = grammar({
       '//',
       optional($._comment_content),
       $._newline,
-      optional(seq($._indent, seq($._comment_content, $._newline), $._dedent))
+      optional(seq($._indent, repeat(seq($._comment_content, $._newline)), $._dedent))
     ),
     tag_name: $ => /\w(?:[-:\w]*\w)?/,
     class: $ => /\.[_a-z0-9\-]*[_a-z][_a-z0-9\-]*/i,
