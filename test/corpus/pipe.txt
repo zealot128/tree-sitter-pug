@@ -1,0 +1,74 @@
+========================
+Tag with piped content
+=========================
+
+div
+  |Content here
+
+---
+
+(source_file
+  (tag
+    (tag_name)
+    (children
+      (pipe_content (content)))))
+
+========================
+Tag with blank piped content + tag
+=========================
+
+div
+  |
+  | Content here
+  |
+  div
+
+---
+
+(source_file
+  (tag
+    (tag_name)
+    (children
+     (pipe_content)
+     (pipe_content (content))
+     (pipe_content)
+     (tag (tag_name))
+    )
+))
+
+
+========================
+Tag with multi-line piped content
+=========================
+
+div
+  |Content here
+  |more
+  | content here,
+
+---
+
+(source_file
+  (tag
+    (tag_name)
+    (children
+      (pipe_content (content))
+      (pipe_content (content))
+      (pipe_content (content))
+      )))
+
+========================
+Content Javascript
+=========================
+
+div
+  |Content {{ some JS code here }} Content
+
+---
+
+(source_file
+  (tag
+    (tag_name)
+    (children
+    (pipe_content (content) (javascript) (content)))))
+

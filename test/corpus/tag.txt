@@ -54,6 +54,20 @@ some-tag(attr, other-attr="test")
       (attribute (attribute_name) (quoted_attribute_value (attribute_value))))))
 
 ========================
+vue-attribute modifier
+========================
+
+some-tag(@click.prevent.stop="click")
+
+---
+
+(source_file
+  (tag
+    (tag_name)
+    (attributes
+      (attribute (attribute_name) (attribute_modifier) (attribute_modifier) (quoted_attribute_value (attribute_value))))))
+
+========================
 Tag with content
 =========================
 
@@ -69,29 +83,25 @@ some-tag(attr) content
     (content)))
 
 ========================
-Comment
-========================
+Wrapped Tag with content
+=========================
 
-// Some comment that is
-
----
-
-(source_file
-  (comment))
-
-
-========================
-Multiline comment
-========================
-
-// Some comment
-  with nested line that
-  are still commented
+div.card: div.card-body content
 
 ---
 
 (source_file
-  (comment))
+  (tag
+    (tag_name)
+    (class)
+    (tag
+      (tag_name)
+      (class)
+      (content)
+    )
+  )
+)
+
 
 ========================
 Tag with children
@@ -116,37 +126,3 @@ some-tag
           (attribute (attribute_name)))))))
 
 
-========================
-Mixed example
-========================
-
-// some comment
-some-tag.class-one(attr) the content
-  sub-tag.some-slass
-    sub-sub-tag content
-  other-subtag#with-id.and-class(and-attr)
-
----
-
-(source_file
-  (comment)
-  (tag
-    (tag_name)
-    (class)
-    (attributes
-      (attribute (attribute_name)))
-    (content)
-    (children
-      (tag
-        (tag_name)
-        (class)
-        (children
-          (tag
-            (tag_name)
-            (content))))
-      (tag
-        (tag_name)
-        (id)
-        (class)
-        (attributes
-          (attribute (attribute_name)))))))

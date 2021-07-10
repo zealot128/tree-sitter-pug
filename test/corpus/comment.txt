@@ -1,0 +1,26 @@
+========================
+Comment
+========================
+
+// Some comment that is
+
+---
+
+(source_file
+  (comment))
+
+
+========================
+Multiline comment
+========================
+
+// Some comment
+  with nested line that
+  are still commented
+
+---
+
+(source_file
+  (comment))
+
+

@@ -1,54 +1,72 @@
 module.exports = grammar({
-  name: 'pug',
-  externals: $ => [
-    $._newline,
-    $._indent,
-    $._dedent
-  ],
+  name: "pug",
+  externals: ($) => [$._newline, $._indent, $._dedent],
   rules: {
-    source_file: $ => repeat(choice($.comment, $.tag)),
-    tag: $ => seq(
-      choice($.tag_name, $.id, $.class),
-      optional(repeat(choice($.id, $.class))),
-      optional($.attributes),
-      optional(seq(' ', $.content)),
-      $._newline,
-      optional($.children),
-    ),
-    attributes: $ => seq(
-      '(',
-      repeat(seq(
-        $.attribute,
-        choice(',', ' ')
-      )),
-      optional($.attribute),
-      ')',
-    ),
-    attribute: $ => seq(
-      $.attribute_name,
-      optional(seq(
-        '=',
-        $.quoted_attribute_value
-      ))
-    ),
-    children: $ => choice(
-      seq($._indent, repeat($.tag), $._dedent),
-    ),
-    comment: $ => seq(
-      '//',
-      optional($._comment_content),
-      $._newline,
-      optional(seq($._indent, repeat(seq($._comment_content, $._newline)), $._dedent))
-    ),
-    tag_name: $ => /\w(?:[-:\w]*\w)?/,
-    class: $ => /\.[_a-z0-9\-]*[_a-z][_a-z0-9\-]*/i,
-    id: $ => /#[\w-]+/,
-    attribute_name: $ => /[\w@\-:]+/,
-    quoted_attribute_value: $ => choice(
-      seq("'", optional(alias(/[^']+/, $.attribute_value)), "'"),
-      seq('"', optional(alias(/[^"]+/, $.attribute_value)), '"')
-    ),
-    content: $ => /[^\n]+/,
-    _comment_content: $ => /[^ ][^\n]*/
-  }
-})
+    source_file: ($) => repeat(choice($.comment, $.tag)),
+    pipe_content: ($) =>
+      seq(
+        "|",
+        optional($._content_or_javascript),
+        $._newline,
+      ),
+    tag: ($) =>
+      seq(
+        choice($.tag_name, $.id, $.class),
+        optional(repeat1(choice($.id, $.class))),
+        optional($.attributes),
+        choice(
+          seq(":", $.tag),
+          seq(
+            optional(seq(" ", $._content_or_javascript)),
+            $._newline,
+            optional($.children)
+          )
+        )
+      ),
+    attributes: ($) =>
+      seq(
+        "(",
+        repeat(seq($.attribute, choice(",", " "))),
+        optional($.attribute),
+        ")"
+      ),
+    attribute: ($) =>
+      seq(
+        $.attribute_name,
+        optional(repeat1(seq(
+          ".",
+          alias(/[\w@\-:]+/, $.attribute_modifier)
+        ))),
+        optional(seq("=", $.quoted_attribute_value))
+      ),
+    children: $ => seq($._indent, repeat1($._children_choice), $._dedent),
+    _children_choice: ($) =>
+      choice(
+        $.pipe_content,
+        $.tag,
+      ),
+    comment: ($) =>
+      seq(
+        "//",
+        optional($._comment_content),
+        $._newline,
+        optional(
+          seq($._indent, repeat(seq($._comment_content, $._newline)), $._dedent)
+        )
+      ),
+    tag_name: ($) => /\w(?:[-:\w]*\w)?/,
+    class: ($) => /\.[_a-z0-9\-]*[_a-z][_a-z0-9\-]*/i,
+    id: ($) => /#[\w-]+/,
+    attribute_name: ($) => /[\w@\-:]+/,
+    quoted_attribute_value: ($) =>
+      choice(
+        seq("'", optional(alias(/[^']+/, $.attribute_value)), "'"),
+        seq('"', optional(alias(/[^"]+/, $.attribute_value)), '"')
+      ),
+    javascript: ($) => /[^\n}]+/,
+    content: ($) => /[^\n\{]+/,
+    _content_or_javascript: ($) =>
+      repeat1(choice(seq("{{", $.javascript, "}}"), $.content)),
+    _comment_content: ($) => /[^ ][^\n]*/,
+  },
+});
