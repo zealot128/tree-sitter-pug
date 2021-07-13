@@ -2,13 +2,11 @@ module.exports = grammar({
   name: "pug",
   externals: ($) => [$._newline, $._indent, $._dedent],
   rules: {
-    source_file: ($) => repeat(choice($.comment, $.tag)),
+    source_file: ($) => repeat(choice($.comment, $.tag, $.doctype)),
+    doctype: ($) =>
+      seq("doctype", alias(choice("html", "strict", "xml"), $.doctype_name)),
     pipe_content: ($) =>
-      seq(
-        "|",
-        optional($._content_or_javascript),
-        $._newline,
-      ),
+      seq("|", optional($._content_or_javascript), $._newline),
     tag: ($) =>
       seq(
         choice($.tag_name, $.id, $.class),
@@ -16,12 +14,24 @@ module.exports = grammar({
         optional($.attributes),
         choice(
           seq(":", $.tag),
+          $._content_after_dot,
           seq(
             optional(seq(" ", $._content_or_javascript)),
             $._newline,
             optional($.children)
           )
         )
+      ),
+    _content_after_dot: ($) =>
+      seq(
+        ".",
+        $._newline,
+        $._indent,
+        alias(
+          repeat1(seq($._content_or_javascript, $._newline)),
+          $.children
+        ),
+        $._dedent
       ),
     attributes: ($) =>
       seq(
@@ -33,18 +43,11 @@ module.exports = grammar({
     attribute: ($) =>
       seq(
         $.attribute_name,
-        optional(repeat1(seq(
-          ".",
-          alias(/[\w@\-:]+/, $.attribute_modifier)
-        ))),
+        optional(repeat1(seq(".", alias(/[\w@\-:]+/, $.attribute_modifier)))),
         optional(seq("=", $.quoted_attribute_value))
       ),
-    children: $ => seq($._indent, repeat1($._children_choice), $._dedent),
-    _children_choice: ($) =>
-      choice(
-        $.pipe_content,
-        $.tag,
-      ),
+    children: ($) => seq($._indent, repeat1($._children_choice), $._dedent),
+    _children_choice: ($) => choice($.pipe_content, $.tag),
     comment: ($) =>
       seq(
         "//",

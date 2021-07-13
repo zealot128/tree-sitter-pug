@@ -72,3 +72,23 @@ div
     (children
     (pipe_content (content) (javascript) (content)))))
 
+========================
+Multiline with dot
+=========================
+
+div.
+  Content here
+  more
+  content here,
+
+---
+
+(source_file
+  (tag
+    (tag_name)
+    (children
+      (content)
+      (content)
+      (content)
+    )
+))

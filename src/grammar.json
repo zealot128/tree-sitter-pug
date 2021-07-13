@@ -13,9 +13,44 @@
           {
             "type": "SYMBOL",
             "name": "tag"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "doctype"
           }
         ]
       }
+    },
+    "doctype": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "doctype"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "STRING",
+                "value": "html"
+              },
+              {
+                "type": "STRING",
+                "value": "strict"
+              },
+              {
+                "type": "STRING",
+                "value": "xml"
+              }
+            ]
+          },
+          "named": true,
+          "value": "doctype_name"
+        }
+      ]
     },
     "pipe_content": {
       "type": "SEQ",
@@ -115,6 +150,10 @@
               ]
             },
             {
+              "type": "SYMBOL",
+              "name": "_content_after_dot"
+            },
+            {
               "type": "SEQ",
               "members": [
                 {
@@ -157,6 +196,48 @@
               ]
             }
           ]
+        }
+      ]
+    },
+    "_content_after_dot": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "."
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_newline"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_indent"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "REPEAT1",
+            "content": {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "_content_or_javascript"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "_newline"
+                }
+              ]
+            }
+          },
+          "named": true,
+          "value": "children"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_dedent"
         }
       ]
     },

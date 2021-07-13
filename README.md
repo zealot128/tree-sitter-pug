@@ -13,14 +13,11 @@ currently missing:
 - [ ] Control Flow (if, each, else, case, include...)
   https://pugjs.org/language/conditionals.html
   https://pugjs.org/language/includes.html
-- [ ] doctype
-  https://pugjs.org/language/doctype.html
 - [ ] inline Javascript code with "- "
 - [ ] output Javascript code with "= "
   https://pugjs.org/language/code.html
 - [ ] inline Javascript code with "#{...}"
 - [ ] Filters
-- [ ] Piped Content with a dot on the tag
 
 
 To add tests, check out `./test/corpus/*.txt`

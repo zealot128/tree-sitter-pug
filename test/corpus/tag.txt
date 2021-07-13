@@ -125,4 +125,16 @@ some-tag
         (attributes
           (attribute (attribute_name)))))))
 
+========================
+Doctype html
+========================
 
+doctype html
+doctype strict
+
+---
+
+(source_file
+  (doctype (doctype_name))
+  (doctype (doctype_name))
+)
