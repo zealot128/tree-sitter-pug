@@ -46,7 +46,7 @@ module.exports = grammar({
         optional(repeat1(seq(".", alias(/[\w@\-:]+/, $.attribute_modifier)))),
         optional(seq("=", $.quoted_attribute_value))
       ),
-    children: ($) => seq($._indent, repeat1($._children_choice), $._dedent),
+    children: ($) => prec.right(seq($._indent, repeat1($._children_choice), optional($._dedent))),
     _children_choice: ($) => choice($.pipe_content, $.tag),
     comment: ($) =>
       seq(
@@ -54,11 +54,11 @@ module.exports = grammar({
         optional($._comment_content),
         $._newline,
         optional(
-          seq($._indent, repeat(seq($._comment_content, $._newline)), $._dedent)
+          seq($._indent, repeat(seq($._comment_content, $._newline)), optional($._dedent))
         )
       ),
     tag_name: ($) => /\w(?:[-:\w]*\w)?/,
-    class: ($) => /\.[_a-z0-9\-]*[_a-z][_a-z0-9\-]*/i,
+    class: ($) => /\.[_a-z0-9\-]*[_a-zA-Z][_a-zA-Z0-9\-]*/i,
     id: ($) => /#[\w-]+/,
     attribute_name: ($) => /[\w@\-:]+/,
     quoted_attribute_value: ($) =>
