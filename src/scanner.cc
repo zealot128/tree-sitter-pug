@@ -1,24 +1,16 @@
+#include <cstring>
+#include <cwctype>
+#include <stdio.h>
 #include <tree_sitter/parser.h>
 #include <vector>
-#include <cwctype>
-#include <cstring>
-#include <stdio.h>
 
 namespace {
 using std::vector;
-using std::iswspace;
-using std::memcpy;
 
-enum TokenType {
-  _NEWLINE,
-  _INDENT,
-  _DEDENT
-};
+enum TokenType { _NEWLINE, _INDENT, _DEDENT };
 
 struct Scanner {
-  Scanner() {
-    
-  }
+  Scanner() { deserialize(nullptr, 0); }
 
   unsigned serialize(char *buffer) {
     size_t i = 0;
@@ -33,9 +25,8 @@ struct Scanner {
     i += stack_size;
     */
 
-    vector<uint16_t>::iterator
-      iter = indent_length_stack.begin() + 1,
-      end = indent_length_stack.end();
+    vector<uint16_t>::iterator iter = indent_length_stack.begin() + 1,
+                               end = indent_length_stack.end();
 
     for (; iter != end && i < TREE_SITTER_SERIALIZATION_BUFFER_SIZE; ++iter) {
       buffer[i++] = *iter;
@@ -48,20 +39,17 @@ struct Scanner {
     indent_length_stack.clear();
     indent_length_stack.push_back(0);
 
-    if (length == 0) return;
-    size_t i = 0;
-    for (; i < length; ++i) {
-      indent_length_stack.push_back(buffer[i]);
+    if (length > 0) {
+      for (size_t i = 0; i < length; ++i) {
+        indent_length_stack.push_back(buffer[i]);
+      }
+      return;
     }
   }
 
-  void advance(TSLexer *lexer) {
-    lexer->advance(lexer, false);
-  }
+  void advance(TSLexer *lexer) { lexer->advance(lexer, false); }
 
-  void skip(TSLexer *lexer) {
-    lexer->advance(lexer, true);
-  }
+  void skip(TSLexer *lexer) { lexer->advance(lexer, true); }
 
   bool scan(TSLexer *lexer, const bool *valid_symbols) {
     if (lexer->lookahead == '\n') {
@@ -69,10 +57,11 @@ struct Scanner {
         skip(lexer);
         lexer->result_symbol = _NEWLINE;
         return true;
-      } else return false;
+      } else
+        return false;
     }
 
-    if (lexer->get_column(lexer) == 0) {
+    if (lexer->lookahead && lexer->get_column(lexer) == 0) {
       uint32_t indent_length = 0;
 
       for (;;) {
@@ -82,15 +71,18 @@ struct Scanner {
         } else if (lexer->lookahead == '\t') {
           indent_length += 8; // TODO: double check if this is fine
           skip(lexer);
-        } else break;
+        } else
+          break;
       }
 
-      if (indent_length > indent_length_stack.back() && valid_symbols[_INDENT]) {
+      if (indent_length > indent_length_stack.back() &&
+          valid_symbols[_INDENT]) {
         indent_length_stack.push_back(indent_length);
         lexer->result_symbol = _INDENT;
         return true;
       }
-      if (indent_length < indent_length_stack.back() && valid_symbols[_DEDENT]) {
+      if (indent_length < indent_length_stack.back() &&
+          valid_symbols[_DEDENT]) {
         indent_length_stack.pop_back();
         lexer->result_symbol = _DEDENT;
         return true;
@@ -102,26 +94,27 @@ struct Scanner {
 
   vector<uint16_t> indent_length_stack;
 };
-}
+} // namespace
 
 extern "C" {
 
-void *tree_sitter_pug_external_scanner_create() {
-  return new Scanner();
-}
+void *tree_sitter_pug_external_scanner_create() { return new Scanner(); }
 
 bool tree_sitter_pug_external_scanner_scan(void *payload, TSLexer *lexer,
-                                            const bool *valid_symbols) {
+                                           const bool *valid_symbols) {
   Scanner *scanner = static_cast<Scanner *>(payload);
   return scanner->scan(lexer, valid_symbols);
 }
 
-unsigned tree_sitter_pug_external_scanner_serialize(void *payload, char *buffer) {
+unsigned tree_sitter_pug_external_scanner_serialize(void *payload,
+                                                    char *buffer) {
   Scanner *scanner = static_cast<Scanner *>(payload);
   return scanner->serialize(buffer);
 }
 
-void tree_sitter_pug_external_scanner_deserialize(void *payload, const char *buffer, unsigned length) {
+void tree_sitter_pug_external_scanner_deserialize(void *payload,
+                                                  const char *buffer,
+                                                  unsigned length) {
   Scanner *scanner = static_cast<Scanner *>(payload);
   scanner->deserialize(buffer, length);
 }
@@ -130,5 +123,4 @@ void tree_sitter_pug_external_scanner_destroy(void *payload) {
   Scanner *scanner = static_cast<Scanner *>(payload);
   delete scanner;
 }
-
 }
