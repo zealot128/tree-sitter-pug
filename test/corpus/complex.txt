@@ -32,3 +32,19 @@ some-tag.class-one(attr) the content
         (class)
         (attributes
           (attribute (attribute_name)))))))
+
+========================
+Escaped quotes
+========================
+
+some-tag(single='\'"`', double="'\"`", backtick=`'"\``)
+
+---
+
+(source_file
+  (tag
+    (tag_name)
+    (attributes
+      (attribute (attribute_name) (quoted_attribute_value (attribute_value)))
+      (attribute (attribute_name) (quoted_attribute_value (attribute_value)))
+      (attribute (attribute_name) (quoted_attribute_value (attribute_value))))))

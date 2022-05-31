@@ -230,6 +230,10 @@
     "named": false
   },
   {
+    "type": "`",
+    "named": false
+  },
+  {
     "type": "attribute_modifier",
     "named": true
   },

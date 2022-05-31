@@ -63,8 +63,9 @@ module.exports = grammar({
     attribute_name: ($) => /[\w@\-:]+/,
     quoted_attribute_value: ($) =>
       choice(
-        seq("'", optional(alias(/[^']+/, $.attribute_value)), "'"),
-        seq('"', optional(alias(/[^"]+/, $.attribute_value)), '"')
+        seq("'", optional(alias(/[^'\\]*(?:\\.[^'\\]*)*/, $.attribute_value)), "'"),
+        seq('"', optional(alias(/[^"\\]*(?:\\.[^"\\]*)*/, $.attribute_value)), '"'),
+        seq("`", optional(alias(/[^`\\]*(?:\\.[^`\\]*)*/, $.attribute_value)), "`")
       ),
     javascript: ($) => /[^\n}]+/,
     content: ($) => /[^\n\{]+/,

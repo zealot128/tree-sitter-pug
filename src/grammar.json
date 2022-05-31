@@ -498,7 +498,7 @@
                   "type": "ALIAS",
                   "content": {
                     "type": "PATTERN",
-                    "value": "[^']+"
+                    "value": "[^'\\\\]*(?:\\\\.[^'\\\\]*)*"
                   },
                   "named": true,
                   "value": "attribute_value"
@@ -528,7 +528,7 @@
                   "type": "ALIAS",
                   "content": {
                     "type": "PATTERN",
-                    "value": "[^\"]+"
+                    "value": "[^\"\\\\]*(?:\\\\.[^\"\\\\]*)*"
                   },
                   "named": true,
                   "value": "attribute_value"
@@ -541,6 +541,36 @@
             {
               "type": "STRING",
               "value": "\""
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "`"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "[^`\\\\]*(?:\\\\.[^`\\\\]*)*"
+                  },
+                  "named": true,
+                  "value": "attribute_value"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            },
+            {
+              "type": "STRING",
+              "value": "`"
             }
           ]
         }
