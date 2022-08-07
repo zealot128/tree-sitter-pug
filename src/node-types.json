@@ -98,6 +98,11 @@
     }
   },
   {
+    "type": "js_attribute_name",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "pipe_content",
     "named": true,
     "fields": {},
@@ -282,10 +287,6 @@
   },
   {
     "type": "javascript",
-    "named": true
-  },
-  {
-    "type": "js_attribute_name",
     "named": true
   },
   {

@@ -14,3 +14,37 @@ some-tag([attr]='hello')
         (js_attribute_name)
         (quoted_javascript
           (javascript))))))
+
+============
+Angular output
+============
+
+some-tag((attr)='hello')
+
+---
+
+(source_file
+  (tag
+    (tag_name)
+    (attributes
+      (attribute
+        (js_attribute_name)
+        (quoted_javascript
+          (javascript))))))
+
+============
+Angular output javascript
+============
+
+some-tag((attr)='console.log("test")')
+
+---
+
+(source_file
+  (tag
+    (tag_name)
+    (attributes
+      (attribute
+        (js_attribute_name)
+        (quoted_javascript
+          (javascript))))))

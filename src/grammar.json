@@ -550,8 +550,17 @@
       "value": "#[\\w-]+"
     },
     "js_attribute_name": {
-      "type": "PATTERN",
-      "value": "\\[[\\w@\\-:]+\\]"
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "\\[[\\w@\\-:]+\\]"
+        },
+        {
+          "type": "PATTERN",
+          "value": "\\([\\w@\\-:]+\\)"
+        }
+      ]
     },
     "attribute_name": {
       "type": "PATTERN",
