@@ -75,6 +75,7 @@ module.exports = grammar({
       choice(
         /\[[\w@\-:]+\]/,
         /\([\w@\-:]+\)/,
+        /\*[\w@\-:]+/,
       ),
     attribute_name: ($) => /[\w@\-:]+/,
     quoted_javascript: ($) =>

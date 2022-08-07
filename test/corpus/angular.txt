@@ -48,3 +48,20 @@ some-tag((attr)='console.log("test")')
         (js_attribute_name)
         (quoted_javascript
           (javascript))))))
+
+============
+Angular directive
+============
+
+some-tag(*ngIf='enabled')
+
+---
+
+(source_file
+  (tag
+    (tag_name)
+    (attributes
+      (attribute
+        (js_attribute_name)
+        (quoted_javascript
+          (javascript))))))
