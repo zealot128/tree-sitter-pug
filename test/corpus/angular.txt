@@ -1,0 +1,16 @@
+============
+Angular attribute
+============
+
+some-tag([attr]='hello')
+
+---
+
+(source_file
+  (tag
+    (tag_name)
+    (attributes
+      (attribute
+        (js_attribute_name)
+        (quoted_javascript
+          (javascript))))))

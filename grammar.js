@@ -41,10 +41,21 @@ module.exports = grammar({
         ")"
       ),
     attribute: ($) =>
+      choice(
+        $._attribute,
+        $._js_attribute,
+      ),
+    _attribute: ($) =>
       seq(
         $.attribute_name,
         optional(repeat1(seq(".", alias(/[\w@\-:]+/, $.attribute_modifier)))),
         optional(seq("=", $.quoted_attribute_value))
+      ),
+    _js_attribute: ($) => 
+      seq(
+        $.js_attribute_name,
+        optional(repeat1(seq(".", alias(/[\w@\-:]+/, $.attribute_modifier)))),
+        optional(seq("=", $.quoted_javascript))
       ),
     children: ($) => prec.right(seq($._indent, repeat1($._children_choice), optional($._dedent))),
     _children_choice: ($) => choice($.pipe_content, $.tag),
@@ -60,7 +71,13 @@ module.exports = grammar({
     tag_name: ($) => /\w(?:[-:\w]*\w)?/,
     class: ($) => /\.[_a-z0-9\-]*[_a-zA-Z][_a-zA-Z0-9\-]*/i,
     id: ($) => /#[\w-]+/,
+    js_attribute_name: ($) => /\[[\w@\-:]+\]/,
     attribute_name: ($) => /[\w@\-:]+/,
+    quoted_javascript: ($) =>
+      choice(
+        seq("'", optional(alias(/[^']+/, $.javascript)), "'"),
+        seq('"', optional(alias(/[^"]+/, $.javascript)), '"')
+      ),
     quoted_attribute_value: ($) =>
       choice(
         seq("'", optional(alias(/[^']+/, $.attribute_value)), "'"),

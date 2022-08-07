@@ -292,6 +292,19 @@
       ]
     },
     "attribute": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "_attribute"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_js_attribute"
+        }
+      ]
+    },
+    "_attribute": {
       "type": "SEQ",
       "members": [
         {
@@ -340,6 +353,65 @@
                 {
                   "type": "SYMBOL",
                   "name": "quoted_attribute_value"
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
+    "_js_attribute": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "js_attribute_name"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "REPEAT1",
+              "content": {
+                "type": "SEQ",
+                "members": [
+                  {
+                    "type": "STRING",
+                    "value": "."
+                  },
+                  {
+                    "type": "ALIAS",
+                    "content": {
+                      "type": "PATTERN",
+                      "value": "[\\w@\\-:]+"
+                    },
+                    "named": true,
+                    "value": "attribute_modifier"
+                  }
+                ]
+              }
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": "="
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "quoted_javascript"
                 }
               ]
             },
@@ -477,9 +549,78 @@
       "type": "PATTERN",
       "value": "#[\\w-]+"
     },
+    "js_attribute_name": {
+      "type": "PATTERN",
+      "value": "\\[[\\w@\\-:]+\\]"
+    },
     "attribute_name": {
       "type": "PATTERN",
       "value": "[\\w@\\-:]+"
+    },
+    "quoted_javascript": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "'"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "[^']+"
+                  },
+                  "named": true,
+                  "value": "javascript"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            },
+            {
+              "type": "STRING",
+              "value": "'"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "\""
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "[^\"]+"
+                  },
+                  "named": true,
+                  "value": "javascript"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            },
+            {
+              "type": "STRING",
+              "value": "\""
+            }
+          ]
+        }
+      ]
     },
     "quoted_attribute_value": {
       "type": "CHOICE",
