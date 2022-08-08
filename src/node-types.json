@@ -83,6 +83,25 @@
     "fields": {}
   },
   {
+    "type": "conditional",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "tag",
+          "named": true
+        },
+        {
+          "type": "un_delimited_javascript",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "doctype",
     "named": true,
     "fields": {},
@@ -161,6 +180,10 @@
       "types": [
         {
           "type": "comment",
+          "named": true
+        },
+        {
+          "type": "conditional",
           "named": true
         },
         {
@@ -318,8 +341,20 @@
     "named": true
   },
   {
+    "type": "else",
+    "named": false
+  },
+  {
+    "type": "else if",
+    "named": false
+  },
+  {
     "type": "id",
     "named": true
+  },
+  {
+    "type": "if",
+    "named": false
   },
   {
     "type": "javascript",
@@ -328,6 +363,10 @@
   {
     "type": "tag_name",
     "named": true
+  },
+  {
+    "type": "unless",
+    "named": false
   },
   {
     "type": "{{",

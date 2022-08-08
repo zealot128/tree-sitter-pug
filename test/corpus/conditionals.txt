@@ -1,0 +1,28 @@
+============
+Conditional
+============
+
+if user.description
+  tag
+else if authorised
+  tag
+else
+  tag
+
+---
+
+(source_file
+  (conditional
+    (un_delimited_javascript)
+    (tag
+      (tag_name)))
+  (conditional
+    (un_delimited_javascript)
+    (tag
+      (tag_name)))
+  (conditional
+    (tag
+      (tag_name))))
+
+
+
