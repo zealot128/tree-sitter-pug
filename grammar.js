@@ -2,7 +2,7 @@ module.exports = grammar({
   name: "pug",
   externals: ($) => [$._newline, $._indent, $._dedent],
   rules: {
-    source_file: ($) => repeat(choice($.comment, $.tag, $.doctype)),
+    source_file: ($) => repeat(choice($.comment, $.tag, $.doctype, $.unbuffered_code)),
     doctype: ($) =>
       seq("doctype", alias(choice("html", "strict", "xml"), $.doctype_name)),
     pipe_content: ($) =>
@@ -15,11 +15,11 @@ module.exports = grammar({
         choice(
           seq(":", $.tag),
           $._content_after_dot,
-          seq(
+          prec.left(seq(
             optional(seq(" ", $._content_or_javascript)),
             $._newline,
             optional($.children)
-          )
+          ))
         )
       ),
     _content_after_dot: ($) =>
@@ -33,6 +33,7 @@ module.exports = grammar({
         ),
         $._dedent
       ),
+
     attributes: ($) =>
       seq(
         "(",
@@ -57,8 +58,10 @@ module.exports = grammar({
         optional(repeat1(seq(".", alias(/[\w@\-:]+/, $.attribute_modifier)))),
         optional(seq("=", $.quoted_javascript))
       ),
+
     children: ($) => prec.right(seq($._indent, repeat1($._children_choice), optional($._dedent))),
     _children_choice: ($) => choice($.pipe_content, $.tag),
+
     comment: ($) =>
       seq(
         "//",
@@ -68,9 +71,11 @@ module.exports = grammar({
           seq($._indent, repeat(seq($._comment_content, $._newline)), optional($._dedent))
         )
       ),
+
     tag_name: ($) => /\w(?:[-:\w]*\w)?/,
     class: ($) => /\.[_a-z0-9\-]*[_a-zA-Z][_a-zA-Z0-9\-]*/i,
     id: ($) => /#[\w-]+/,
+
     js_attribute_name: () => 
       choice(
         /\[[\w@\-:]+\]/,
@@ -78,6 +83,7 @@ module.exports = grammar({
         /\*[\w@\-:]+/,
       ),
     attribute_name: ($) => /[\w@\-:]+/,
+
     quoted_javascript: ($) =>
       choice(
         seq("'", optional(alias(/[^']+/, $.javascript)), "'"),
@@ -88,10 +94,40 @@ module.exports = grammar({
         seq("'", optional(alias(/[^']+/, $.attribute_value)), "'"),
         seq('"', optional(alias(/[^"]+/, $.attribute_value)), '"')
       ),
-    javascript: ($) => /[^\n}]+/,
+
     content: ($) => /[^\n\{]+/,
-    _content_or_javascript: ($) =>
-      repeat1(choice(seq("{{", $.javascript, "}}"), $.content)),
     _comment_content: ($) => /[^ ][^\n]*/,
+    _content_or_javascript: ($) =>
+      repeat1(choice(seq("{{", $.delimited_javascript, "}}"), $.content)),
+
+    // TODO: can delimited_javascript and un_delimited_javascript be merged?
+    delimited_javascript: () => /[^\n}]+/,
+    // I only want this node to be exposed sometimes
+    un_delimited_javascript: ($) => $._un_delimited_javascript_line,
+    _un_delimited_javascript_line: () => /(.)+?/,
+    _un_delimited_javascript_multiline: ($) => repeat1($._un_delimited_javascript_line),
+    _single_line_buf_code: ($) => 
+      prec.right(
+        seq(
+          $.un_delimited_javascript,
+          repeat($.tag)
+        ),
+      ),
+    _multi_line_buf_code: ($) => 
+      seq(
+        $._newline,
+        $._un_delimited_javascript_multiline,
+      ),
+    unbuffered_code: ($) =>
+      prec.right(
+        seq(
+          '-',
+          token.immediate(/( |\t)*/),
+          choice(
+            $._single_line_buf_code,
+          ),
+          optional($._dedent),
+        )
+      )
   },
 });

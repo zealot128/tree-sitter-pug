@@ -63,7 +63,7 @@
           "named": true
         },
         {
-          "type": "javascript",
+          "type": "delimited_javascript",
           "named": true
         },
         {
@@ -115,7 +115,7 @@
           "named": true
         },
         {
-          "type": "javascript",
+          "type": "delimited_javascript",
           "named": true
         }
       ]
@@ -170,6 +170,10 @@
         {
           "type": "tag",
           "named": true
+        },
+        {
+          "type": "unbuffered_code",
+          "named": true
         }
       ]
     }
@@ -199,11 +203,11 @@
           "named": true
         },
         {
-          "type": "id",
+          "type": "delimited_javascript",
           "named": true
         },
         {
-          "type": "javascript",
+          "type": "id",
           "named": true
         },
         {
@@ -212,6 +216,30 @@
         },
         {
           "type": "tag_name",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "un_delimited_javascript",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "unbuffered_code",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "tag",
+          "named": true
+        },
+        {
+          "type": "un_delimited_javascript",
           "named": true
         }
       ]
@@ -239,6 +267,10 @@
   },
   {
     "type": ",",
+    "named": false
+  },
+  {
+    "type": "-",
     "named": false
   },
   {
@@ -271,6 +303,10 @@
   },
   {
     "type": "content",
+    "named": true
+  },
+  {
+    "type": "delimited_javascript",
     "named": true
   },
   {

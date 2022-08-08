@@ -1,0 +1,57 @@
+============
+Unbuffered code
+============
+
+- var x = 12
+tag
+
+---
+
+(source_file
+  (unbuffered_code
+    (un_delimited_javascript)
+    (tag
+      (tag_name))))
+
+
+============
+Unbuffered code multi line
+============
+
+- for (var x = 0; x < 3; x++)
+  li item
+tag
+
+---
+
+(source_file
+  (unbuffered_code
+    (un_delimited_javascript)
+    (tag
+      (tag_name)
+      (content))
+    (tag
+      (tag_name))))
+
+
+============
+Unbuffered code multi line blank first
+============
+
+- 
+  for (var x = 0; x < 3; x++)
+  li item
+tag
+
+---
+
+(source_file
+  (unbuffered_code
+    (un_delimited_javascript)
+    (tag
+      (tag_name)
+      (content))
+    (tag
+      (tag_name))))
+
+
