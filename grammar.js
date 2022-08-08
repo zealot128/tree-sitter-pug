@@ -72,9 +72,9 @@ module.exports = grammar({
         )
       ),
 
-    tag_name: ($) => /\w(?:[-:\w]*\w)?/,
-    class: ($) => /\.[_a-z0-9\-]*[_a-zA-Z][_a-zA-Z0-9\-]*/i,
-    id: ($) => /#[\w-]+/,
+    tag_name: () => /\w(?:[-:\w]*\w)?/,
+    class: () => /\.[_a-z0-9\-]*[_a-zA-Z][_a-zA-Z0-9\-]*/i,
+    id: () => /#[\w-]+/,
 
     js_attribute_name: () => 
       choice(
@@ -82,7 +82,7 @@ module.exports = grammar({
         /\([\w@\-:]+\)/,
         /\*[\w@\-:]+/,
       ),
-    attribute_name: ($) => /[\w@\-:]+/,
+    attribute_name: () => /[\w@\-:]+/,
 
     quoted_javascript: ($) =>
       choice(
@@ -95,8 +95,8 @@ module.exports = grammar({
         seq('"', optional(alias(/[^"]+/, $.attribute_value)), '"')
       ),
 
-    content: ($) => /[^\n\{]+/,
-    _comment_content: ($) => /[^ ][^\n]*/,
+    content: () => /[^\n\{]+/,
+    _comment_content: () => /[^ ][^\n]*/,
     _content_or_javascript: ($) =>
       repeat1(choice(seq("{{", $.delimited_javascript, "}}"), $.content)),
 
