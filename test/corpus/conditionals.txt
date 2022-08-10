@@ -13,11 +13,11 @@ else
 
 (source_file
   (conditional
-    (un_delimited_javascript)
+    (javascript)
     (tag
       (tag_name)))
   (conditional
-    (un_delimited_javascript)
+    (javascript)
     (tag
       (tag_name)))
   (conditional

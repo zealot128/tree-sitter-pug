@@ -11,7 +11,7 @@ some-tag([attr]='hello')
     (tag_name)
     (attributes
       (attribute
-        (js_attribute_name)
+        (attribute_name)
         (quoted_javascript
           (javascript))))))
 
@@ -28,7 +28,7 @@ some-tag((attr)='hello')
     (tag_name)
     (attributes
       (attribute
-        (js_attribute_name)
+        (attribute_name)
         (quoted_javascript
           (javascript))))))
 
@@ -45,7 +45,7 @@ some-tag((attr)='console.log("test")')
     (tag_name)
     (attributes
       (attribute
-        (js_attribute_name)
+        (attribute_name)
         (quoted_javascript
           (javascript))))))
 
@@ -62,6 +62,6 @@ some-tag(*ngIf='enabled')
     (tag_name)
     (attributes
       (attribute
-        (js_attribute_name)
+        (attribute_name)
         (quoted_javascript
           (javascript))))))

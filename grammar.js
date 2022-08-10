@@ -17,7 +17,7 @@ module.exports = grammar({
                 'else if',
                 'unless',
               ),
-              $.un_delimited_javascript,
+              $._un_delimited_javascript,
             ),
             'else',
           ),
@@ -71,7 +71,7 @@ module.exports = grammar({
       ),
     _js_attribute: ($) => 
       seq(
-        $.js_attribute_name,
+        alias($.js_attribute_name, $.attribute_name),
         optional(repeat1(seq(".", alias(/[\w@\-:]+/, $.attribute_modifier)))),
         optional(seq("=", $.quoted_javascript))
       ),
@@ -115,18 +115,18 @@ module.exports = grammar({
     content: () => /[^\n\{]+/,
     _comment_content: () => /[^ ][^\n]*/,
     _content_or_javascript: ($) =>
-      repeat1(choice(seq("{{", $.delimited_javascript, "}}"), $.content)),
+      repeat1(choice(seq("{{", $._delimited_javascript, "}}"), $.content)),
 
-    // TODO: can delimited_javascript and un_delimited_javascript be merged?
-    delimited_javascript: () => /[^\n}]+/,
+    // TODO: can _delimited_javascript and _un_delimited_javascript be merged?
+    _delimited_javascript: ($) => alias(/[^\n}]+/, $.javascript),
     // I only want this node to be exposed sometimes
-    un_delimited_javascript: ($) => $._un_delimited_javascript_line,
-    _un_delimited_javascript_line: () => /(.)+?/,
+    _un_delimited_javascript: ($) => $._un_delimited_javascript_line,
+    _un_delimited_javascript_line: ($) => alias(/(.)+?/, $.javascript),
     _un_delimited_javascript_multiline: ($) => repeat1($._un_delimited_javascript_line),
     _single_line_buf_code: ($) => 
       prec.right(
         seq(
-          $.un_delimited_javascript,
+          $._un_delimited_javascript,
           repeat($.tag)
         ),
       ),

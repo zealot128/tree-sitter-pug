@@ -70,7 +70,7 @@ div
   (tag
     (tag_name)
     (children
-    (pipe_content (content) (delimited_javascript) (content)))))
+    (pipe_content (content) (javascript) (content)))))
 
 ========================
 Multiline with dot

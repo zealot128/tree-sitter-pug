@@ -16,10 +16,6 @@
           "named": true
         },
         {
-          "type": "js_attribute_name",
-          "named": true
-        },
-        {
           "type": "quoted_attribute_value",
           "named": true
         },
@@ -63,7 +59,7 @@
           "named": true
         },
         {
-          "type": "delimited_javascript",
+          "type": "javascript",
           "named": true
         },
         {
@@ -91,11 +87,11 @@
       "required": true,
       "types": [
         {
-          "type": "tag",
+          "type": "javascript",
           "named": true
         },
         {
-          "type": "un_delimited_javascript",
+          "type": "tag",
           "named": true
         }
       ]
@@ -117,11 +113,6 @@
     }
   },
   {
-    "type": "js_attribute_name",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "pipe_content",
     "named": true,
     "fields": {},
@@ -134,7 +125,7 @@
           "named": true
         },
         {
-          "type": "delimited_javascript",
+          "type": "javascript",
           "named": true
         }
       ]
@@ -226,11 +217,11 @@
           "named": true
         },
         {
-          "type": "delimited_javascript",
+          "type": "id",
           "named": true
         },
         {
-          "type": "id",
+          "type": "javascript",
           "named": true
         },
         {
@@ -245,24 +236,19 @@
     }
   },
   {
-    "type": "un_delimited_javascript",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "unbuffered_code",
     "named": true,
     "fields": {},
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
-          "type": "tag",
+          "type": "javascript",
           "named": true
         },
         {
-          "type": "un_delimited_javascript",
+          "type": "tag",
           "named": true
         }
       ]
@@ -326,10 +312,6 @@
   },
   {
     "type": "content",
-    "named": true
-  },
-  {
-    "type": "delimited_javascript",
     "named": true
   },
   {

@@ -9,7 +9,7 @@ tag
 
 (source_file
   (unbuffered_code
-    (un_delimited_javascript)
+    (javascript)
     (tag
       (tag_name))))
 
@@ -26,7 +26,7 @@ tag
 
 (source_file
   (unbuffered_code
-    (un_delimited_javascript)
+    (javascript)
     (tag
       (tag_name)
       (content))
@@ -47,7 +47,7 @@ tag
 
 (source_file
   (unbuffered_code
-    (un_delimited_javascript)
+    (javascript)
     (tag
       (tag_name)
       (content))

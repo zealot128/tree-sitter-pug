@@ -116,7 +116,7 @@
                   },
                   {
                     "type": "SYMBOL",
-                    "name": "un_delimited_javascript"
+                    "name": "_un_delimited_javascript"
                   }
                 ]
               },
@@ -430,8 +430,13 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "js_attribute_name"
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "js_attribute_name"
+          },
+          "named": true,
+          "value": "attribute_name"
         },
         {
           "type": "CHOICE",
@@ -785,7 +790,7 @@
               },
               {
                 "type": "SYMBOL",
-                "name": "delimited_javascript"
+                "name": "_delimited_javascript"
               },
               {
                 "type": "STRING",
@@ -800,17 +805,27 @@
         ]
       }
     },
-    "delimited_javascript": {
-      "type": "PATTERN",
-      "value": "[^\\n}]+"
+    "_delimited_javascript": {
+      "type": "ALIAS",
+      "content": {
+        "type": "PATTERN",
+        "value": "[^\\n}]+"
+      },
+      "named": true,
+      "value": "javascript"
     },
-    "un_delimited_javascript": {
+    "_un_delimited_javascript": {
       "type": "SYMBOL",
       "name": "_un_delimited_javascript_line"
     },
     "_un_delimited_javascript_line": {
-      "type": "PATTERN",
-      "value": "(.)+?"
+      "type": "ALIAS",
+      "content": {
+        "type": "PATTERN",
+        "value": "(.)+?"
+      },
+      "named": true,
+      "value": "javascript"
     },
     "_un_delimited_javascript_multiline": {
       "type": "REPEAT1",
@@ -827,7 +842,7 @@
         "members": [
           {
             "type": "SYMBOL",
-            "name": "un_delimited_javascript"
+            "name": "_un_delimited_javascript"
           },
           {
             "type": "REPEAT",
