@@ -67,7 +67,10 @@ module.exports = grammar({
       seq(
         $.attribute_name,
         optional(repeat1(seq(".", alias(/[\w@\-:]+/, $.attribute_modifier)))),
-        optional(seq("=", $.quoted_attribute_value))
+        choice(
+          optional(seq("=", $.quoted_attribute_value)),
+          optional(seq("=", /[^'"]/, alias(/[^)]+/, $.javascript))),
+        )
       ),
     _js_attribute: ($) => 
       seq(

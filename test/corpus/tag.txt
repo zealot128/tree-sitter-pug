@@ -138,3 +138,20 @@ doctype strict
   (doctype (doctype_name))
   (doctype (doctype_name))
 )
+
+========================
+Tag with code attributes
+========================
+
+tag(attr=authenticated ? "authed" : "not auth")
+
+---
+
+(source_file
+  (tag
+    (tag_name)
+    (attributes
+      (attribute
+        (attribute_name)
+        (javascript)))))
+

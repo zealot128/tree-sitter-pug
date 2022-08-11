@@ -16,6 +16,10 @@
           "named": true
         },
         {
+          "type": "javascript",
+          "named": true
+        },
+        {
           "type": "quoted_attribute_value",
           "named": true
         },
