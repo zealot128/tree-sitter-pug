@@ -56,14 +56,10 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "content",
-          "named": true
-        },
-        {
-          "type": "javascript",
           "named": true
         },
         {
@@ -117,6 +113,11 @@
     }
   },
   {
+    "type": "javascript",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "pipe_content",
     "named": true,
     "fields": {},
@@ -126,10 +127,6 @@
       "types": [
         {
           "type": "content",
-          "named": true
-        },
-        {
-          "type": "javascript",
           "named": true
         }
       ]
@@ -225,10 +222,6 @@
           "named": true
         },
         {
-          "type": "javascript",
-          "named": true
-        },
-        {
           "type": "tag",
           "named": true
         },
@@ -245,7 +238,7 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "javascript",
@@ -341,10 +334,6 @@
   {
     "type": "if",
     "named": false
-  },
-  {
-    "type": "javascript",
-    "named": true
   },
   {
     "type": "tag_name",

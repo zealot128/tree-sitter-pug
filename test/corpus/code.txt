@@ -9,13 +9,13 @@ tag
 
 (source_file
   (unbuffered_code
-    (javascript)
-    (tag
-      (tag_name))))
+    (javascript))
+  (tag
+    (tag_name)))
 
 
 ============
-Unbuffered code multi line
+Unbuffered code single line with element
 ============
 
 - for (var x = 0; x < 3; x++)
@@ -29,9 +29,9 @@ tag
     (javascript)
     (tag
       (tag_name)
-      (content))
-    (tag
-      (tag_name))))
+      (content)))
+  (tag
+    (tag_name)))
 
 
 ============
@@ -47,11 +47,8 @@ tag
 
 (source_file
   (unbuffered_code
-    (javascript)
-    (tag
-      (tag_name)
-      (content))
-    (tag
-      (tag_name))))
+    (javascript))
+  (tag
+    (tag_name)))
 
 

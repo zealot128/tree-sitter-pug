@@ -115,8 +115,13 @@
                     ]
                   },
                   {
-                    "type": "SYMBOL",
-                    "name": "_un_delimited_javascript"
+                    "type": "ALIAS",
+                    "content": {
+                      "type": "SYMBOL",
+                      "name": "_un_delimited_javascript"
+                    },
+                    "named": true,
+                    "value": "javascript"
                   }
                 ]
               },
@@ -841,32 +846,26 @@
       }
     },
     "_delimited_javascript": {
-      "type": "ALIAS",
-      "content": {
-        "type": "PATTERN",
-        "value": "[^\\n}]+"
-      },
-      "named": true,
-      "value": "javascript"
+      "type": "PATTERN",
+      "value": "[^\\n}]+"
     },
     "_un_delimited_javascript": {
       "type": "SYMBOL",
       "name": "_un_delimited_javascript_line"
     },
     "_un_delimited_javascript_line": {
-      "type": "ALIAS",
-      "content": {
-        "type": "PATTERN",
-        "value": "(.)+?"
-      },
-      "named": true,
-      "value": "javascript"
+      "type": "PATTERN",
+      "value": "(.)+?"
     },
     "_un_delimited_javascript_multiline": {
       "type": "REPEAT1",
       "content": {
-        "type": "SYMBOL",
-        "name": "_un_delimited_javascript_line"
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "SYMBOL",
+          "name": "_un_delimited_javascript_line"
+        }
       }
     },
     "_single_line_buf_code": {
@@ -876,31 +875,63 @@
         "type": "SEQ",
         "members": [
           {
-            "type": "SYMBOL",
-            "name": "_un_delimited_javascript"
-          },
-          {
-            "type": "REPEAT",
+            "type": "ALIAS",
             "content": {
               "type": "SYMBOL",
-              "name": "tag"
-            }
+              "name": "_un_delimited_javascript"
+            },
+            "named": true,
+            "value": "javascript"
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SEQ",
+                "members": [
+                  {
+                    "type": "SYMBOL",
+                    "name": "_newline"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "_indent"
+                  },
+                  {
+                    "type": "REPEAT1",
+                    "content": {
+                      "type": "SYMBOL",
+                      "name": "tag"
+                    }
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "_dedent"
+                  }
+                ]
+              },
+              {
+                "type": "SYMBOL",
+                "name": "_newline"
+              }
+            ]
           }
         ]
       }
     },
     "_multi_line_buf_code": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "_newline"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_un_delimited_javascript_multiline"
-        }
-      ]
+      "type": "ALIAS",
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "_un_delimited_javascript_multiline"
+          }
+        ]
+      },
+      "named": true,
+      "value": "javascript"
     },
     "unbuffered_code": {
       "type": "PREC_RIGHT",
@@ -923,8 +954,30 @@
             "type": "CHOICE",
             "members": [
               {
-                "type": "SYMBOL",
-                "name": "_single_line_buf_code"
+                "type": "SEQ",
+                "members": [
+                  {
+                    "type": "SYMBOL",
+                    "name": "_single_line_buf_code"
+                  }
+                ]
+              },
+              {
+                "type": "SEQ",
+                "members": [
+                  {
+                    "type": "SYMBOL",
+                    "name": "_newline"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "_indent"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "_multi_line_buf_code"
+                  }
+                ]
               }
             ]
           },

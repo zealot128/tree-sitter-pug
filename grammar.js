@@ -17,7 +17,7 @@ module.exports = grammar({
                 'else if',
                 'unless',
               ),
-              $._un_delimited_javascript,
+              alias($._un_delimited_javascript, $.javascript),
             ),
             'else',
           ),
@@ -121,30 +121,44 @@ module.exports = grammar({
       repeat1(choice(seq("{{", $._delimited_javascript, "}}"), $.content)),
 
     // TODO: can _delimited_javascript and _un_delimited_javascript be merged?
-    _delimited_javascript: ($) => alias(/[^\n}]+/, $.javascript),
+    _delimited_javascript: ($) => /[^\n}]+/,
     // I only want this node to be exposed sometimes
     _un_delimited_javascript: ($) => $._un_delimited_javascript_line,
-    _un_delimited_javascript_line: ($) => alias(/(.)+?/, $.javascript),
-    _un_delimited_javascript_multiline: ($) => repeat1($._un_delimited_javascript_line),
+    _un_delimited_javascript_line: ($) => /(.)+?/,
+    _un_delimited_javascript_multiline: ($) => repeat1(prec(1, $._un_delimited_javascript_line)),
     _single_line_buf_code: ($) => 
-      prec.right(
+       prec.right(     
         seq(
-          $._un_delimited_javascript,
-          repeat($.tag)
+          alias($._un_delimited_javascript, $.javascript),
+          choice(
+            seq(
+              $._newline,
+              $._indent,
+              repeat1($.tag),
+              $._dedent,
+            ),
+            $._newline,
+          ),
         ),
-      ),
+      ), 
     _multi_line_buf_code: ($) => 
-      seq(
-        $._newline,
+      alias(seq(
         $._un_delimited_javascript_multiline,
-      ),
+      ), $.javascript),
     unbuffered_code: ($) =>
       prec.right(
         seq(
           '-',
           token.immediate(/( |\t)*/),
           choice(
-            $._single_line_buf_code,
+            seq(
+              $._single_line_buf_code,
+            ),
+            seq(
+              $._newline,
+              $._indent,
+              $._multi_line_buf_code,
+            ),
           ),
           optional($._dedent),
         )
