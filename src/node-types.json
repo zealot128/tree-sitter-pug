@@ -70,6 +70,25 @@
     }
   },
   {
+    "type": "case",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "javascript",
+          "named": true
+        },
+        {
+          "type": "when",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "children",
     "named": true,
     "fields": {},
@@ -194,6 +213,10 @@
           "named": true
         },
         {
+          "type": "case",
+          "named": true
+        },
+        {
           "type": "comment",
           "named": true
         },
@@ -306,6 +329,29 @@
     }
   },
   {
+    "type": "when",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "javascript",
+          "named": true
+        },
+        {
+          "type": "tag",
+          "named": true
+        },
+        {
+          "type": "unbuffered_code",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": " ",
     "named": false
   },
@@ -362,12 +408,20 @@
     "named": true
   },
   {
+    "type": "case",
+    "named": false
+  },
+  {
     "type": "class",
     "named": true
   },
   {
     "type": "content",
     "named": true
+  },
+  {
+    "type": "default",
+    "named": false
   },
   {
     "type": "doctype",
@@ -399,6 +453,10 @@
   },
   {
     "type": "unless",
+    "named": false
+  },
+  {
+    "type": "when",
     "named": false
   },
   {

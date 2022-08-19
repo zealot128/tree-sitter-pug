@@ -33,6 +33,10 @@
           {
             "type": "SYMBOL",
             "name": "unescaped_buffered_code"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "case"
           }
         ]
       }
@@ -148,6 +152,163 @@
           }
         ]
       }
+    },
+    "case": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "case"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_un_delimited_javascript_line"
+          },
+          "named": true,
+          "value": "javascript"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_newline"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_indent"
+        },
+        {
+          "type": "REPEAT1",
+          "content": {
+            "type": "SYMBOL",
+            "name": "when"
+          }
+        }
+      ]
+    },
+    "_when_content": {
+      "type": "PREC_RIGHT",
+      "value": 0,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SEQ",
+                "members": [
+                  {
+                    "type": "SYMBOL",
+                    "name": "_newline"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "_indent"
+                  }
+                ]
+              },
+              {
+                "type": "STRING",
+                "value": ":"
+              }
+            ]
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "REPEAT",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "tag"
+                }
+              },
+              {
+                "type": "SYMBOL",
+                "name": "unbuffered_code"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "_when_keyword": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "when"
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "PATTERN",
+                "value": "[^:\\n]+?"
+              },
+              "named": true,
+              "value": "javascript"
+            }
+          ]
+        },
+        {
+          "type": "STRING",
+          "value": "default"
+        }
+      ]
+    },
+    "when": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "_when_keyword"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "_when_content"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "_newline"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_dedent"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
     },
     "unescaped_buffered_code": {
       "type": "SEQ",

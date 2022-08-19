@@ -2,7 +2,18 @@ module.exports = grammar({
   name: "pug",
   externals: ($) => [$._newline, $._indent, $._dedent],
   rules: {
-    source_file: ($) => repeat(choice($.conditional, $.comment, $.tag, $.doctype, $.unbuffered_code, $.buffered_code, $.unescaped_buffered_code)),
+    source_file: ($) => repeat(
+      choice(
+        $.conditional,
+        $.comment,
+        $.tag,
+        $.doctype,
+        $.unbuffered_code,
+        $.buffered_code,
+        $.unescaped_buffered_code,
+        $.case,
+      ),
+    ),
     doctype: ($) =>
       seq("doctype", alias(choice("html", "strict", "xml"), $.doctype_name)),
     pipe_content: ($) =>
@@ -23,6 +34,53 @@ module.exports = grammar({
           ),
           repeat1($.tag),
         ),
+      ),
+    case: ($) =>
+      seq(
+        'case',
+        alias($._un_delimited_javascript_line, $.javascript),
+        $._newline,
+        $._indent,
+        repeat1(
+          $.when,
+        ),
+      ),
+    _when_content: ($) => 
+      prec.right(
+        seq(
+          choice(
+            // Where the content is on the next line
+            seq(
+              $._newline,
+              $._indent,
+            ),
+            // Where the content follows a : on the same line
+            ':'
+          ),
+          choice(
+            repeat($.tag),
+            $.unbuffered_code,
+          ),
+        ),
+      ),
+    _when_keyword: ($) => 
+      choice(
+        seq(
+          'when',
+          // `when`s don't work with properly with objects, so removing : from regex is fine.
+          alias(/[^:\n]+?/, $.javascript),
+        ),
+        'default',
+      ),
+    when: ($) => 
+      seq(
+        $._when_keyword,
+        choice(
+          optional($._when_content),
+          // There are newlines between each when case, but not the last when
+          optional($._newline), 
+        ),
+        optional($._dedent)
       ),
     unescaped_buffered_code: ($) =>
       seq(
