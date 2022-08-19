@@ -12,11 +12,12 @@ module.exports = grammar({
         $.buffered_code,
         $.unescaped_buffered_code,
         $.case,
+        $.pipe,
       ),
     ),
     doctype: ($) =>
       seq("doctype", alias(choice("html", "strict", "xml"), $.doctype_name)),
-    pipe_content: ($) =>
+    pipe: ($) =>
       seq("|", optional($._content_or_javascript), $._newline),
     conditional: ($) =>
       prec.left(
@@ -157,7 +158,7 @@ module.exports = grammar({
       ),
 
     children: ($) => prec.right(seq($._indent, repeat1($._children_choice), optional($._dedent))),
-    _children_choice: ($) => choice($.pipe_content, $.tag),
+    _children_choice: ($) => choice($.pipe, $.tag),
 
     comment: ($) =>
       seq(

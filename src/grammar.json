@@ -37,6 +37,10 @@
           {
             "type": "SYMBOL",
             "name": "case"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "pipe"
           }
         ]
       }
@@ -72,7 +76,7 @@
         }
       ]
     },
-    "pipe_content": {
+    "pipe": {
       "type": "SEQ",
       "members": [
         {
@@ -801,7 +805,7 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "pipe_content"
+          "name": "pipe"
         },
         {
           "type": "SYMBOL",

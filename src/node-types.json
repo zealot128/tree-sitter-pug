@@ -101,7 +101,7 @@
           "named": true
         },
         {
-          "type": "pipe_content",
+          "type": "pipe",
           "named": true
         },
         {
@@ -156,7 +156,7 @@
     "fields": {}
   },
   {
-    "type": "pipe_content",
+    "type": "pipe",
     "named": true,
     "fields": {},
     "children": {
@@ -226,6 +226,10 @@
         },
         {
           "type": "doctype",
+          "named": true
+        },
+        {
+          "type": "pipe",
           "named": true
         },
         {
