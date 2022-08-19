@@ -106,3 +106,57 @@ p = 'buf' + 'fered'
     (tag_name)
     (content)))
 
+============
+Unescaped buffered code single line in tag
+============
+
+tag!= 'buf' + 'fered'
+
+---
+
+(source_file
+  (tag
+    (tag_name)
+    (unescaped_buffered_code
+      (javascript))))
+
+============
+Unescaped buffered code multi line in tag
+============
+
+tag
+  != 'buf' + 'fered'
+
+---
+
+(source_file
+  (tag
+    (tag_name)
+    (unescaped_buffered_code
+      (javascript))))
+
+============
+Unescaped buffered code single line without tag
+===========
+
+!= 'buf' + 'fered'
+
+---
+
+(source_file
+  (unescaped_buffered_code
+      (javascript)))
+
+============
+Regular text that looks like buffered code inside a tag
+============
+
+p != 'buf' + 'fered'
+
+---
+
+(source_file
+  (tag
+    (tag_name)
+    (content)))
+

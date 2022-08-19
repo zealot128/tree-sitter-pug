@@ -212,6 +212,10 @@
         {
           "type": "unbuffered_code",
           "named": true
+        },
+        {
+          "type": "unescaped_buffered_code",
+          "named": true
         }
       ]
     }
@@ -255,6 +259,10 @@
         {
           "type": "tag_name",
           "named": true
+        },
+        {
+          "type": "unescaped_buffered_code",
+          "named": true
         }
       ]
     }
@@ -279,7 +287,30 @@
     }
   },
   {
+    "type": "unescaped_buffered_code",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "javascript",
+          "named": true
+        },
+        {
+          "type": "tag",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": " ",
+    "named": false
+  },
+  {
+    "type": "!=",
     "named": false
   },
   {
