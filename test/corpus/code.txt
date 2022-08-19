@@ -52,3 +52,57 @@ tag
     (tag_name)))
 
 
+============
+Buffered code single line in tag
+============
+
+tag= 'buf' + 'fered'
+
+---
+
+(source_file
+  (tag
+    (tag_name)
+    (buffered_code
+      (javascript))))
+
+============
+Buffered code multi line in tag
+============
+
+tag
+  = 'buf' + 'fered'
+
+---
+
+(source_file
+  (tag
+    (tag_name)
+    (buffered_code
+      (javascript))))
+
+============
+Buffered code single line without tag
+===========
+
+= 'buf' + 'fered'
+
+---
+
+(source_file
+  (buffered_code
+      (javascript)))
+
+============
+Regular text that looks like buffered code inside a tag
+============
+
+p = 'buf' + 'fered'
+
+---
+
+(source_file
+  (tag
+    (tag_name)
+    (content)))
+

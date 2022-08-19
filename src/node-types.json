@@ -51,6 +51,25 @@
     }
   },
   {
+    "type": "buffered_code",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "javascript",
+          "named": true
+        },
+        {
+          "type": "tag",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "children",
     "named": true,
     "fields": {},
@@ -171,6 +190,10 @@
       "required": false,
       "types": [
         {
+          "type": "buffered_code",
+          "named": true
+        },
+        {
           "type": "comment",
           "named": true
         },
@@ -203,6 +226,10 @@
       "types": [
         {
           "type": "attributes",
+          "named": true
+        },
+        {
+          "type": "buffered_code",
           "named": true
         },
         {

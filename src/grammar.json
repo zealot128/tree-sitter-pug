@@ -25,6 +25,10 @@
           {
             "type": "SYMBOL",
             "name": "unbuffered_code"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "buffered_code"
           }
         ]
       }
@@ -141,6 +145,19 @@
         ]
       }
     },
+    "buffered_code": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "="
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_single_line_buf_code"
+        }
+      ]
+    },
     "tag": {
       "type": "SEQ",
       "members": [
@@ -216,6 +233,36 @@
             {
               "type": "SYMBOL",
               "name": "_content_after_dot"
+            },
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SEQ",
+                      "members": [
+                        {
+                          "type": "SYMBOL",
+                          "name": "_newline"
+                        },
+                        {
+                          "type": "SYMBOL",
+                          "name": "_indent"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "BLANK"
+                    }
+                  ]
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "buffered_code"
+                }
+              ]
             },
             {
               "type": "PREC_LEFT",

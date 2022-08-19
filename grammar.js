@@ -2,7 +2,7 @@ module.exports = grammar({
   name: "pug",
   externals: ($) => [$._newline, $._indent, $._dedent],
   rules: {
-    source_file: ($) => repeat(choice($.conditional, $.comment, $.tag, $.doctype, $.unbuffered_code)),
+    source_file: ($) => repeat(choice($.conditional, $.comment, $.tag, $.doctype, $.unbuffered_code, $.buffered_code)),
     doctype: ($) =>
       seq("doctype", alias(choice("html", "strict", "xml"), $.doctype_name)),
     pipe_content: ($) =>
@@ -24,6 +24,11 @@ module.exports = grammar({
           repeat1($.tag),
         ),
       ),
+    buffered_code: ($) =>
+      seq(
+        '=',
+        $._single_line_buf_code,
+      ),
     tag: ($) =>
       seq(
         choice($.tag_name, $.id, $.class),
@@ -32,6 +37,15 @@ module.exports = grammar({
         choice(
           seq(":", $.tag),
           $._content_after_dot,
+          seq(
+            optional(
+              seq(
+                $._newline,
+                $._indent,
+              ),
+            ),
+            $.buffered_code,
+          ),
           prec.left(seq(
             optional(seq(" ", $._content_or_javascript)),
             $._newline,
