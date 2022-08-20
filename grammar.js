@@ -1,3 +1,4 @@
+// TODO: support `tag(attr='hello' + goodbye)`
 module.exports = grammar({
   name: "pug",
   externals: ($) => [$._newline, $._indent, $._dedent],
@@ -139,21 +140,106 @@ module.exports = grammar({
     attribute: ($) =>
       choice(
         $._attribute,
-        $._js_attribute,
+        $._angular_attribute,
+      ),
+    _ternary_attribute_value: ($) =>
+      seq(
+        "=",
+        /[^'"]/,
+        alias(
+          token(
+            seq(
+              /[^?]+?/,
+              '?',
+              /[^)?]+?/,
+              choice(
+                /[^ )]*?/,
+                choice(
+                  /'.*'/,
+                  /".*"/,
+                  /`.*`/,
+                ),
+              ),
+            )
+          ),
+          $.javascript
+        ),
+      ),
+    _string_attribute_value: ($) =>
+      seq(
+        "=",
+        $.quoted_attribute_value
+      ),
+    _variable_attribute_value: ($) =>
+      seq(
+        "=",
+        /[^'"]/,
+        alias(
+          // No function calls, nor spaces allowed in javascript attributes
+          /[^ )]+/,
+          $.javascript
+        ),
+      ),
+    _object_attribute_value: ($) =>
+      seq(
+        "=",
+        alias(
+          token(
+            seq(
+              "{",
+              /([^\[\]()]*?(, ?)?)*?/,
+              "}",
+            ),
+          ),
+          $.javascript,
+        ),
+      ),
+    _template_attribute_value: ($) =>
+      seq(
+        "=",
+        alias(
+          token(
+            seq(
+              "`",
+              /[^`]*?/,
+              "`",
+            ),
+          ),
+          $.javascript,
+        ),
+      ),
+    _array_attribute_value: ($) =>
+      seq(
+        "=",
+        alias(
+          token(
+            seq(
+              "[",
+              /[^\[\]()]*?/,
+              "]",
+            ),
+          ),
+          $.javascript,
+        ),
       ),
     _attribute: ($) =>
       seq(
         $.attribute_name,
         optional(repeat1(seq(".", alias(/[\w@\-:]+/, $.attribute_modifier)))),
-        choice(
-          optional(seq("=", $.quoted_attribute_value)),
-          optional(seq("=", /[^'"]/, alias(/[^)]+/, $.javascript))),
-        )
+        optional(
+          choice(
+            $._string_attribute_value,
+            $._ternary_attribute_value,
+            $._variable_attribute_value,
+            $._array_attribute_value,
+            $._object_attribute_value,
+            $._template_attribute_value,
+          ),
+        ),
       ),
-    _js_attribute: ($) => 
+    _angular_attribute: ($) => 
       seq(
-        alias($.js_attribute_name, $.attribute_name),
-        optional(repeat1(seq(".", alias(/[\w@\-:]+/, $.attribute_modifier)))),
+        alias($.angular_attribute_name, $.attribute_name),
         optional(seq("=", $.quoted_javascript))
       ),
 
@@ -174,7 +260,7 @@ module.exports = grammar({
     class: () => /\.[_a-z0-9\-]*[_a-zA-Z][_a-zA-Z0-9\-]*/i,
     id: () => /#[\w-]+/,
 
-    js_attribute_name: () => 
+    angular_attribute_name: () => 
       choice(
         /\[[\w@\-:]+\]/,
         /\([\w@\-:]+\)/,

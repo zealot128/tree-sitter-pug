@@ -606,7 +606,204 @@
         },
         {
           "type": "SYMBOL",
-          "name": "_js_attribute"
+          "name": "_angular_attribute"
+        }
+      ]
+    },
+    "_ternary_attribute_value": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "="
+        },
+        {
+          "type": "PATTERN",
+          "value": "[^'\"]"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "PATTERN",
+                  "value": "[^?]+?"
+                },
+                {
+                  "type": "STRING",
+                  "value": "?"
+                },
+                {
+                  "type": "PATTERN",
+                  "value": "[^)?]+?"
+                },
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "PATTERN",
+                      "value": "[^ )]*?"
+                    },
+                    {
+                      "type": "CHOICE",
+                      "members": [
+                        {
+                          "type": "PATTERN",
+                          "value": "'.*'"
+                        },
+                        {
+                          "type": "PATTERN",
+                          "value": "\".*\""
+                        },
+                        {
+                          "type": "PATTERN",
+                          "value": "`.*`"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "named": true,
+          "value": "javascript"
+        }
+      ]
+    },
+    "_string_attribute_value": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "="
+        },
+        {
+          "type": "SYMBOL",
+          "name": "quoted_attribute_value"
+        }
+      ]
+    },
+    "_variable_attribute_value": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "="
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "PATTERN",
+            "value": "[^ )]+"
+          },
+          "named": true,
+          "value": "javascript"
+        }
+      ]
+    },
+    "_object_attribute_value": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "="
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": "{"
+                },
+                {
+                  "type": "PATTERN",
+                  "value": "([^\\[\\]()]*?(, ?)?)*?"
+                },
+                {
+                  "type": "STRING",
+                  "value": "}"
+                }
+              ]
+            }
+          },
+          "named": true,
+          "value": "javascript"
+        }
+      ]
+    },
+    "_template_attribute_value": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "="
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": "`"
+                },
+                {
+                  "type": "PATTERN",
+                  "value": "[^`]*?"
+                },
+                {
+                  "type": "STRING",
+                  "value": "`"
+                }
+              ]
+            }
+          },
+          "named": true,
+          "value": "javascript"
+        }
+      ]
+    },
+    "_array_attribute_value": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "="
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": "["
+                },
+                {
+                  "type": "PATTERN",
+                  "value": "[^\\[\\]()]*?"
+                },
+                {
+                  "type": "STRING",
+                  "value": "]"
+                }
+              ]
+            }
+          },
+          "named": true,
+          "value": "javascript"
         }
       ]
     },
@@ -653,97 +850,49 @@
               "type": "CHOICE",
               "members": [
                 {
-                  "type": "SEQ",
-                  "members": [
-                    {
-                      "type": "STRING",
-                      "value": "="
-                    },
-                    {
-                      "type": "SYMBOL",
-                      "name": "quoted_attribute_value"
-                    }
-                  ]
+                  "type": "SYMBOL",
+                  "name": "_string_attribute_value"
                 },
                 {
-                  "type": "BLANK"
+                  "type": "SYMBOL",
+                  "name": "_ternary_attribute_value"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "_variable_attribute_value"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "_array_attribute_value"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "_object_attribute_value"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "_template_attribute_value"
                 }
               ]
             },
             {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "SEQ",
-                  "members": [
-                    {
-                      "type": "STRING",
-                      "value": "="
-                    },
-                    {
-                      "type": "PATTERN",
-                      "value": "[^'\"]"
-                    },
-                    {
-                      "type": "ALIAS",
-                      "content": {
-                        "type": "PATTERN",
-                        "value": "[^)]+"
-                      },
-                      "named": true,
-                      "value": "javascript"
-                    }
-                  ]
-                },
-                {
-                  "type": "BLANK"
-                }
-              ]
+              "type": "BLANK"
             }
           ]
         }
       ]
     },
-    "_js_attribute": {
+    "_angular_attribute": {
       "type": "SEQ",
       "members": [
         {
           "type": "ALIAS",
           "content": {
             "type": "SYMBOL",
-            "name": "js_attribute_name"
+            "name": "angular_attribute_name"
           },
           "named": true,
           "value": "attribute_name"
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "REPEAT1",
-              "content": {
-                "type": "SEQ",
-                "members": [
-                  {
-                    "type": "STRING",
-                    "value": "."
-                  },
-                  {
-                    "type": "ALIAS",
-                    "content": {
-                      "type": "PATTERN",
-                      "value": "[\\w@\\-:]+"
-                    },
-                    "named": true,
-                    "value": "attribute_modifier"
-                  }
-                ]
-              }
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
         },
         {
           "type": "CHOICE",
@@ -895,7 +1044,7 @@
       "type": "PATTERN",
       "value": "#[\\w-]+"
     },
-    "js_attribute_name": {
+    "angular_attribute_name": {
       "type": "CHOICE",
       "members": [
         {

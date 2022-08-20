@@ -140,10 +140,10 @@ doctype strict
 )
 
 ========================
-Tag with code attributes
+Tag with ternary attribute with variables
 ========================
 
-tag(attr=authenticated ? "authed" : "not auth")
+tag(attr=authenticated ? variable : variable)
 
 ---
 
@@ -151,6 +151,116 @@ tag(attr=authenticated ? "authed" : "not auth")
   (tag
     (tag_name)
     (attributes
+      (attribute
+        (attribute_name)
+        (javascript)))))
+
+========================
+Tag with ternary attribute with strings 
+========================
+
+tag(attr=authenticated ? "string" : "string")
+
+---
+
+(source_file
+  (tag
+    (tag_name)
+    (attributes
+      (attribute
+        (attribute_name)
+        (javascript)))))
+
+========================
+Tag with variable attribute
+========================
+
+tag(attr=authenticated)
+
+---
+
+(source_file
+  (tag
+    (tag_name)
+    (attributes
+      (attribute
+        (attribute_name)
+        (javascript)))))
+
+========================
+Tag with object attribute
+========================
+
+tag(attr={key: 'value', 'other': 2}, other=variable)
+
+---
+
+(source_file
+  (tag
+    (tag_name)
+    (attributes
+      (attribute
+        (attribute_name)
+        (javascript))
+      (attribute
+        (attribute_name)
+        (javascript)))))
+
+========================
+Tag with template string
+========================
+
+tag(attr=`hello ${variable} hello` other='hello')
+
+---
+
+(source_file
+  (tag
+    (tag_name)
+    (attributes
+      (attribute
+        (attribute_name)
+        (javascript))
+      (attribute
+        (attribute_name)
+        (quoted_attribute_value
+          (attribute_value))))))
+
+========================
+Tag with array attribute
+========================
+
+tag(attr=['one', 'two', 'three'] other='hello')
+
+---
+
+(source_file
+  (tag
+    (tag_name)
+    (attributes
+      (attribute
+        (attribute_name)
+        (javascript))
+      (attribute
+        (attribute_name)
+        (quoted_attribute_value
+          (attribute_value))))))
+
+========================
+Tag with multiple code attributes
+========================
+
+tag(attr=classes attr=['bing'])
+
+---
+
+(source_file
+  (tag
+    (tag_name)
+    (attributes
+      (attribute
+        (attribute_name)
+        (javascript))
       (attribute
         (attribute_name)
         (javascript)))))
