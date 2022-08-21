@@ -695,6 +695,10 @@
           "value": "="
         },
         {
+          "type": "PATTERN",
+          "value": "[^'\"]"
+        },
+        {
           "type": "ALIAS",
           "content": {
             "type": "PATTERN",
@@ -1216,8 +1220,13 @@
                 "value": "{{"
               },
               {
-                "type": "SYMBOL",
-                "name": "_delimited_javascript"
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "_delimited_javascript"
+                },
+                "named": true,
+                "value": "javascript"
               },
               {
                 "type": "STRING",

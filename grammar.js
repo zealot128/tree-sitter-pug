@@ -282,7 +282,16 @@ module.exports = grammar({
     content: () => /[^\n\{]+/,
     _comment_content: () => /[^ ][^\n]*/,
     _content_or_javascript: ($) =>
-      repeat1(choice(seq("{{", $._delimited_javascript, "}}"), $.content)),
+      repeat1(
+        choice(
+          seq(
+            "{{",
+            alias($._delimited_javascript, $.javascript),
+            "}}"
+          ),
+          $.content
+        ),
+      ),
 
     // TODO: can _delimited_javascript and _un_delimited_javascript be merged?
     _delimited_javascript: ($) => /[^\n}]+/,

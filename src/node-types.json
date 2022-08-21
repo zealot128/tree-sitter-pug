@@ -94,10 +94,14 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "content",
+          "named": true
+        },
+        {
+          "type": "javascript",
           "named": true
         },
         {
@@ -165,6 +169,10 @@
       "types": [
         {
           "type": "content",
+          "named": true
+        },
+        {
+          "type": "javascript",
           "named": true
         }
       ]
@@ -277,6 +285,10 @@
         },
         {
           "type": "id",
+          "named": true
+        },
+        {
+          "type": "javascript",
           "named": true
         },
         {
