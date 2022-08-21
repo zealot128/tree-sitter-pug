@@ -207,6 +207,26 @@ tag(attr={key: 'value', 'other': 2}, other=variable)
         (javascript)))))
 
 ========================
+Tag with function call attr
+========================
+
+tag(attr=true.toString() other='hello')
+
+---
+
+(source_file
+  (tag
+    (tag_name)
+    (attributes
+      (attribute
+        (attribute_name)
+        (javascript))
+      (attribute
+        (attribute_name)
+        (quoted_attribute_value
+          (attribute_value))))))
+
+========================
 Tag with template string
 ========================
 

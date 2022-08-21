@@ -1,4 +1,5 @@
 // TODO: support `tag(attr='hello' + goodbye)`
+// TODO: support multiple levels of function calls in pug js attrs: `tag(attr=true.call(false.toString()))`
 module.exports = grammar({
   name: "pug",
   externals: ($) => [$._newline, $._indent, $._dedent],
@@ -174,7 +175,7 @@ module.exports = grammar({
         "=",
         alias(
           // No function calls, nor spaces allowed in javascript attributes
-          /[^'"{\[][^ )]+/,
+          /[^'"{\[][^ ()]+(\([^)]*?\))?/,
           $.javascript
         ),
       ),
