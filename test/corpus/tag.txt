@@ -83,6 +83,19 @@ some-tag(attr) content
     (content)))
 
 ========================
+Tag with javascript almost interpolation content
+=========================
+
+some-tag co{n#te{nt {text} content
+
+---
+
+(source_file
+  (tag
+    (tag_name)
+    (content)))
+
+========================
 Tag with javascript interpolation content
 =========================
 

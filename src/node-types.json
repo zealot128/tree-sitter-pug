@@ -140,6 +140,11 @@
     }
   },
   {
+    "type": "content",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "doctype",
     "named": true,
     "fields": {},
@@ -380,6 +385,10 @@
     "named": false
   },
   {
+    "type": "#",
+    "named": false
+  },
+  {
     "type": "#{",
     "named": false
   },
@@ -436,10 +445,6 @@
     "named": true
   },
   {
-    "type": "content",
-    "named": true
-  },
-  {
     "type": "default",
     "named": false
   },
@@ -477,6 +482,10 @@
   },
   {
     "type": "when",
+    "named": false
+  },
+  {
+    "type": "{",
     "named": false
   },
   {

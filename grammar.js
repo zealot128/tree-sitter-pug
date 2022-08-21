@@ -279,7 +279,16 @@ module.exports = grammar({
         seq('"', optional(alias(/[^"]+/, $.attribute_value)), '"')
       ),
 
-    content: () => /[^\n{#]+/,
+    content: ($) => 
+      prec.right(
+        repeat1(
+          seq(
+            /[^\n{#]+?/,
+            optional('#'),
+            optional('{')
+          ),
+        ),
+      ),
     _comment_content: () => /[^ ][^\n]*/,
     _content_or_javascript: ($) =>
       repeat1(
