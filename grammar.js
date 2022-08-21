@@ -1,5 +1,6 @@
 // TODO: support `tag(attr='hello' + goodbye)`
 // TODO: support multiple levels of function calls in pug js attrs: `tag(attr=true.call(false.toString()))`
+// TODO: don't break if there are singular { or # in content
 module.exports = grammar({
   name: "pug",
   externals: ($) => [$._newline, $._indent, $._dedent],
@@ -278,11 +279,16 @@ module.exports = grammar({
         seq('"', optional(alias(/[^"]+/, $.attribute_value)), '"')
       ),
 
-    content: () => /[^\n\{]+/,
+    content: () => /[^\n{#]+/,
     _comment_content: () => /[^ ][^\n]*/,
     _content_or_javascript: ($) =>
       repeat1(
         choice(
+          seq(
+            "#{",
+            alias($._delimited_javascript, $.javascript),
+            "}"
+          ),
           seq(
             "{{",
             alias($._delimited_javascript, $.javascript),

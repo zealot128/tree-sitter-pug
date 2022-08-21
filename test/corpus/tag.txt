@@ -83,6 +83,21 @@ some-tag(attr) content
     (content)))
 
 ========================
+Tag with javascript interpolation content
+=========================
+
+some-tag content #{text} content
+
+---
+
+(source_file
+  (tag
+    (tag_name)
+    (content)
+    (javascript)
+    (content)))
+
+========================
 Wrapped Tag with content
 =========================
 
