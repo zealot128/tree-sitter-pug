@@ -145,11 +145,10 @@ module.exports = grammar({
     _ternary_attribute_value: ($) =>
       seq(
         "=",
-        /[^'"]/,
         alias(
           token(
             seq(
-              /[^?]+?/,
+              /[^'"{\[][^?]+?/,
               '?',
               /[^)?]+?/,
               choice(
@@ -173,10 +172,9 @@ module.exports = grammar({
     _variable_attribute_value: ($) =>
       seq(
         "=",
-        /[^'"]/,
         alias(
           // No function calls, nor spaces allowed in javascript attributes
-          /[^ )]+/,
+          /[^'"{\[][^ )]+/,
           $.javascript
         ),
       ),

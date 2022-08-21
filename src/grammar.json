@@ -618,10 +618,6 @@
           "value": "="
         },
         {
-          "type": "PATTERN",
-          "value": "[^'\"]"
-        },
-        {
           "type": "ALIAS",
           "content": {
             "type": "TOKEN",
@@ -630,7 +626,7 @@
               "members": [
                 {
                   "type": "PATTERN",
-                  "value": "[^?]+?"
+                  "value": "[^'\"{\\[][^?]+?"
                 },
                 {
                   "type": "STRING",
@@ -695,14 +691,10 @@
           "value": "="
         },
         {
-          "type": "PATTERN",
-          "value": "[^'\"]"
-        },
-        {
           "type": "ALIAS",
           "content": {
             "type": "PATTERN",
-            "value": "[^ )]+"
+            "value": "[^'\"{\\[][^ )]+"
           },
           "named": true,
           "value": "javascript"
