@@ -23,4 +23,24 @@ Multiline comment
 (source_file
   (comment))
 
+========================
+Multiline comment following buffered code
+========================
+
+p
+  != 'javascript'
+//-
+  Comment content
+tag
+
+---
+
+(source_file
+  (tag
+    (tag_name)
+    (unescaped_buffered_code
+      (javascript)))
+  (comment)
+  (tag
+    (tag_name)))
 

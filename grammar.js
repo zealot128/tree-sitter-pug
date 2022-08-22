@@ -276,8 +276,17 @@ module.exports = grammar({
         optional($._comment_content),
         $._newline,
         optional(
-          seq($._indent, repeat(seq($._comment_content, $._newline)), optional($._dedent))
-        )
+          seq(
+            $._indent,
+            repeat1(
+              seq(
+                $._comment_content,
+                optional($._newline),
+              ),
+            ),
+            optional($._dedent),
+          ),
+        ),
       ),
 
     tag_name: () => /\w(?:[-:\w]*\w)?/,
@@ -313,7 +322,7 @@ module.exports = grammar({
           ),
         ),
       ),
-    _comment_content: () => /[^ ][^\n]*/,
+    _comment_content: () => /.*/,
     _content_or_javascript: ($) =>
       repeat1(
         choice(
@@ -345,11 +354,17 @@ module.exports = grammar({
             seq(
               $._newline,
               $._indent,
-              repeat1($.tag),
+              repeat1(
+                choice(
+                  $.tag,
+                  $._newline,
+                ),
+              ),
               $._dedent,
             ),
             $._newline,
           ),
+          optional($._dedent),
         ),
       ), 
     _multi_line_buf_code: ($) => 

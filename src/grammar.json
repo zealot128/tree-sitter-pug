@@ -1067,7 +1067,7 @@
                   "name": "_indent"
                 },
                 {
-                  "type": "REPEAT",
+                  "type": "REPEAT1",
                   "content": {
                     "type": "SEQ",
                     "members": [
@@ -1076,8 +1076,16 @@
                         "name": "_comment_content"
                       },
                       {
-                        "type": "SYMBOL",
-                        "name": "_newline"
+                        "type": "CHOICE",
+                        "members": [
+                          {
+                            "type": "SYMBOL",
+                            "name": "_newline"
+                          },
+                          {
+                            "type": "BLANK"
+                          }
+                        ]
                       }
                     ]
                   }
@@ -1308,7 +1316,7 @@
     },
     "_comment_content": {
       "type": "PATTERN",
-      "value": "[^ ][^\\n]*"
+      "value": ".*"
     },
     "_content_or_javascript": {
       "type": "REPEAT1",
@@ -1421,8 +1429,17 @@
                   {
                     "type": "REPEAT1",
                     "content": {
-                      "type": "SYMBOL",
-                      "name": "tag"
+                      "type": "CHOICE",
+                      "members": [
+                        {
+                          "type": "SYMBOL",
+                          "name": "tag"
+                        },
+                        {
+                          "type": "SYMBOL",
+                          "name": "_newline"
+                        }
+                      ]
                     }
                   },
                   {
@@ -1434,6 +1451,18 @@
               {
                 "type": "SYMBOL",
                 "name": "_newline"
+              }
+            ]
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "_dedent"
+              },
+              {
+                "type": "BLANK"
               }
             ]
           }
