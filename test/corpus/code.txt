@@ -160,3 +160,42 @@ p != 'buf' + 'fered'
     (tag_name)
     (content)))
 
+============
+Script tag with code
+============
+
+script.
+  if (usingPug)
+    console.log('you are awesome')
+  else
+    console.log('use pug')
+tag
+
+---
+
+(source_file
+  (script_block
+    (javascript))
+  (tag
+    (tag_name)))
+
+============
+Script tag with code and blank lines
+============
+
+script.
+  if (usingPug)
+    console.log('you are awesome')
+
+  else
+    console.log('use pug')
+
+tag
+
+---
+
+(source_file
+  (script_block
+    (javascript))
+  (tag
+    (tag_name)))

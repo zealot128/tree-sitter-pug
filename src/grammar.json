@@ -16,6 +16,10 @@
           },
           {
             "type": "SYMBOL",
+            "name": "script_block"
+          },
+          {
+            "type": "SYMBOL",
             "name": "tag"
           },
           {
@@ -337,6 +341,56 @@
         {
           "type": "SYMBOL",
           "name": "_single_line_buf_code"
+        }
+      ]
+    },
+    "script_block": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "script."
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_newline"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_indent"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "REPEAT1",
+            "content": {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "PATTERN",
+                      "value": "[^\\n]+"
+                    },
+                    {
+                      "type": "BLANK"
+                    }
+                  ]
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "_newline"
+                }
+              ]
+            }
+          },
+          "named": true,
+          "value": "javascript"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_dedent"
         }
       ]
     },

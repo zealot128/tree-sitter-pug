@@ -9,6 +9,7 @@ module.exports = grammar({
       choice(
         $.conditional,
         $.comment,
+        $.script_block,
         $.tag,
         $.doctype,
         $.unbuffered_code,
@@ -22,6 +23,7 @@ module.exports = grammar({
       seq("doctype", alias(choice("html", "strict", "xml"), $.doctype_name)),
     pipe: ($) =>
       seq("|", optional($._content_or_javascript), $._newline),
+
     conditional: ($) =>
       prec.left(
         seq(
@@ -95,6 +97,22 @@ module.exports = grammar({
       seq(
         '=',
         $._single_line_buf_code,
+      ),
+    script_block: ($) =>
+      seq(
+        'script.',
+        $._newline,
+        $._indent,
+        alias(
+          repeat1(
+            seq(
+              optional(/[^\n]+/),
+              $._newline,
+            )
+          ),
+          $.javascript
+        ),
+        $._dedent,
       ),
     tag: ($) =>
       seq(

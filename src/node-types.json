@@ -214,6 +214,21 @@
     }
   },
   {
+    "type": "script_block",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "javascript",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "source_file",
     "named": true,
     "fields": {},
@@ -243,6 +258,10 @@
         },
         {
           "type": "pipe",
+          "named": true
+        },
+        {
+          "type": "script_block",
           "named": true
         },
         {
@@ -470,6 +489,10 @@
   },
   {
     "type": "if",
+    "named": false
+  },
+  {
+    "type": "script.",
     "named": false
   },
   {
