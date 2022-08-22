@@ -122,6 +122,12 @@ module.exports = grammar({
       ),
     _content_after_dot: ($) =>
       seq(
+        optional(
+          seq(
+            $._newline,
+            $._indent,
+          )
+        ),
         ".",
         $._newline,
         $._indent,

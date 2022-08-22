@@ -313,3 +313,40 @@ tag(attr=classes attr=['bing'])
         (attribute_name)
         (javascript)))))
 
+========================
+Tag with dot content same line
+========================
+
+tag.
+    text
+  tag
+
+---
+
+(source_file
+  (tag
+    (tag_name)
+    (children
+      (content)))
+  (tag
+    (tag_name)))
+
+========================
+Tag with dot content newline
+========================
+
+tag
+  .
+    text
+  tag
+
+---
+
+(source_file
+  (tag
+    (tag_name)
+    (children
+      (content)))
+  (tag
+    (tag_name)))
+
