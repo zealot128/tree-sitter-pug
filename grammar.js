@@ -51,7 +51,7 @@ module.exports = grammar({
           $.when,
         ),
       ),
-    _when_content: ($) => 
+    _when_content: ($) =>
       prec.right(
         seq(
           choice(
@@ -69,7 +69,7 @@ module.exports = grammar({
           ),
         ),
       ),
-    _when_keyword: ($) => 
+    _when_keyword: ($) =>
       choice(
         seq(
           'when',
@@ -78,13 +78,13 @@ module.exports = grammar({
         ),
         'default',
       ),
-    when: ($) => 
+    when: ($) =>
       seq(
         $._when_keyword,
         choice(
           optional($._when_content),
           // There are newlines between each when case, but not the last when
-          optional($._newline), 
+          optional($._newline),
         ),
         optional($._dedent)
       ),
@@ -261,7 +261,7 @@ module.exports = grammar({
           ),
         ),
       ),
-    _angular_attribute: ($) => 
+    _angular_attribute: ($) =>
       seq(
         alias($.angular_attribute_name, $.attribute_name),
         optional(seq("=", $.quoted_javascript))
@@ -293,7 +293,7 @@ module.exports = grammar({
     class: () => /\.[_a-z0-9\-]*[_a-zA-Z][_a-zA-Z0-9\-]*/i,
     id: () => /#[\w-]+/,
 
-    angular_attribute_name: () => 
+    angular_attribute_name: () =>
       choice(
         /\[[\w@\-:]+\]/,
         /\([\w@\-:]+\)/,
@@ -312,7 +312,7 @@ module.exports = grammar({
         seq('"', optional(alias(/[^"]+/, $.attribute_value)), '"')
       ),
 
-    content: ($) => 
+    content: ($) =>
       prec.right(
         repeat1(
           seq(
@@ -346,8 +346,8 @@ module.exports = grammar({
     _un_delimited_javascript: ($) => $._un_delimited_javascript_line,
     _un_delimited_javascript_line: ($) => /(.)+?/,
     _un_delimited_javascript_multiline: ($) => repeat1(prec(1, $._un_delimited_javascript_line)),
-    _single_line_buf_code: ($) => 
-       prec.right(     
+    _single_line_buf_code: ($) =>
+      prec.right(
         seq(
           alias($._un_delimited_javascript, $.javascript),
           choice(
@@ -366,8 +366,8 @@ module.exports = grammar({
           ),
           optional($._dedent),
         ),
-      ), 
-    _multi_line_buf_code: ($) => 
+      ),
+    _multi_line_buf_code: ($) =>
       alias(seq(
         $._un_delimited_javascript_multiline,
       ), $.javascript),
