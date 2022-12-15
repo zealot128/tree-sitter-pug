@@ -54,3 +54,43 @@ span
         (tag
           (tag_name))))))
 
+============
+Conditional in tag real example
+============
+
+#user
+  if user.description
+    h2.green Description
+    p= user.description
+  else if authorised
+    span content
+  else
+    span content
+
+---
+
+(source_file
+  (tag
+    (id)
+    (children
+      (conditional
+        (javascript)
+        (tag
+          (tag_name)
+          (class)
+          (content)
+          (children
+            (tag
+              (tag_name)
+              (buffered_code
+                (javascript))))))
+      (conditional
+        (javascript)
+        (tag
+          (tag_name)
+          (content)))
+      (conditional
+        (tag
+          (tag_name)
+          (content))))))
+

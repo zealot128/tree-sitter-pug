@@ -275,7 +275,7 @@ module.exports = grammar({
 
     comment: ($) =>
       seq(
-        "//",
+        choice("//", "//-"),
         optional($._comment_content),
         $._newline,
         optional(
@@ -325,7 +325,7 @@ module.exports = grammar({
           ),
         ),
       ),
-    _comment_content: () => /.*/,
+    _comment_content: () => /[^\n]*/,
     _content_or_javascript: ($) =>
       repeat1(
         choice(
@@ -350,7 +350,7 @@ module.exports = grammar({
     _un_delimited_javascript_line: ($) => /(.)+?/,
     _un_delimited_javascript_multiline: ($) => repeat1(prec(1, $._un_delimited_javascript_line)),
     _single_line_buf_code: ($) =>
-      prec.right(
+      prec.left(
         seq(
           alias($._un_delimited_javascript, $.javascript),
           choice(

@@ -146,8 +146,17 @@
                 ]
               },
               {
-                "type": "STRING",
-                "value": "else"
+                "type": "SEQ",
+                "members": [
+                  {
+                    "type": "STRING",
+                    "value": "else"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "_newline"
+                  }
+                ]
               }
             ]
           },
@@ -1041,8 +1050,17 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "//"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "//"
+            },
+            {
+              "type": "STRING",
+              "value": "//-"
+            }
+          ]
         },
         {
           "type": "CHOICE",
@@ -1320,7 +1338,7 @@
     },
     "_comment_content": {
       "type": "PATTERN",
-      "value": ".*"
+      "value": "[^\\n]*"
     },
     "_content_or_javascript": {
       "type": "REPEAT1",
@@ -1402,7 +1420,7 @@
       }
     },
     "_single_line_buf_code": {
-      "type": "PREC_RIGHT",
+      "type": "PREC_LEFT",
       "value": 0,
       "content": {
         "type": "SEQ",
