@@ -24,5 +24,33 @@ else
     (tag
       (tag_name))))
 
+============
+Conditional in tag
+============
 
+span
+  if user.description
+    tag
+  else if authorised
+    tag
+  else
+    tag
+
+---
+
+(source_file
+  (tag
+    (tag_name)
+    (children
+      (conditional
+        (javascript)
+        (tag
+          (tag_name)))
+      (conditional
+        (javascript)
+        (tag
+          (tag_name)))
+      (conditional
+        (tag
+          (tag_name))))))
 

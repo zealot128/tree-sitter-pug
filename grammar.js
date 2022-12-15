@@ -36,7 +36,10 @@ module.exports = grammar({
               ),
               alias($._un_delimited_javascript, $.javascript),
             ),
-            'else',
+            seq(
+              'else',
+              $._newline,
+            ),
           ),
           repeat1($.tag),
         ),
@@ -268,7 +271,7 @@ module.exports = grammar({
       ),
 
     children: ($) => prec.right(seq($._indent, repeat1($._children_choice), optional($._dedent))),
-    _children_choice: ($) => choice($.pipe, $.tag),
+    _children_choice: ($) => choice($.pipe, $.tag, $.conditional),
 
     comment: ($) =>
       seq(

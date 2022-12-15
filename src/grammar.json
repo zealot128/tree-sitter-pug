@@ -1030,6 +1030,10 @@
         {
           "type": "SYMBOL",
           "name": "tag"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "conditional"
         }
       ]
     },
