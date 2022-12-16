@@ -65,3 +65,38 @@ some-tag(*ngIf='enabled')
         (attribute_name)
         (quoted_javascript
           (javascript))))))
+
+============
+Angular templates
+============
+
+ng-template([ngTemplateOutlet]="tplTemplate", [ngTemplateOutletContext]="{$implicit: 'name'}")
+some-tag(#tplTemplate, let-name)
+  span {{name}}
+
+---
+
+(source_file
+  (tag
+    (tag_name)
+    (attributes
+      (attribute
+        (attribute_name)
+        (quoted_javascript
+          (javascript)))
+      (attribute
+        (attribute_name)
+        (quoted_javascript
+          (javascript)))))
+  (tag
+    (tag_name)
+    (attributes
+      (attribute
+        (attribute_name))
+      (attribute
+        (attribute_name)))
+    (children
+      (tag
+        (tag_name)
+        (javascript)))))
+

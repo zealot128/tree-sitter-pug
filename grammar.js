@@ -2,7 +2,6 @@
 // TODO: support multiple levels of function calls in pug js attrs: `tag(attr=true.call(false.toString()))`
 // TODO: don't break if there are singular { or # in content
 // TODO: add all other types of element to $._children_choice
-// TODO: add support for p(#tplSelect) from angular
 // TODO: check if standalone .class divs are working properly
 module.exports = grammar({
   name: "pug",
@@ -307,7 +306,7 @@ module.exports = grammar({
         /\([\w@\-:]+\)/,
         /\*[\w@\-:]+/,
       ),
-    attribute_name: () => /[\w@\-:]+/,
+    attribute_name: () => /#?[\w@\-:]+/,
 
     quoted_javascript: ($) =>
       choice(

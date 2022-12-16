@@ -1169,7 +1169,7 @@
     },
     "attribute_name": {
       "type": "PATTERN",
-      "value": "[\\w@\\-:]+"
+      "value": "#?[\\w@\\-:]+"
     },
     "quoted_javascript": {
       "type": "CHOICE",
