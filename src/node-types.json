@@ -97,11 +97,27 @@
       "required": false,
       "types": [
         {
+          "type": "buffered_code",
+          "named": true
+        },
+        {
+          "type": "case",
+          "named": true
+        },
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
           "type": "conditional",
           "named": true
         },
         {
           "type": "content",
+          "named": true
+        },
+        {
+          "type": "doctype",
           "named": true
         },
         {
@@ -113,7 +129,19 @@
           "named": true
         },
         {
+          "type": "script_block",
+          "named": true
+        },
+        {
           "type": "tag",
+          "named": true
+        },
+        {
+          "type": "unbuffered_code",
+          "named": true
+        },
+        {
+          "type": "unescaped_buffered_code",
           "named": true
         }
       ]

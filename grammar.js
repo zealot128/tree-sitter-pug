@@ -27,34 +27,31 @@ module.exports = grammar({
       seq("|", optional($._content_or_javascript), $._newline),
 
     conditional: ($) =>
-      prec.left(
-        seq(
-          choice(
-            seq(
-              choice(
-                'if',
-                'else if',
-                'unless',
-              ),
-              alias($._un_delimited_javascript, $.javascript),
-              $._newline,
+      seq(
+        choice(
+          seq(
+            choice(
+              'unless',
+              'if',
+              'else if',
             ),
-            seq(
-              'else',
-              $._newline,
-            ),
+            alias($._un_delimited_javascript, $.javascript),
           ),
-          $.children,
+          'else',
         ),
+        $._newline,
+        $.children,
       ),
     case: ($) =>
-      seq(
-        'case',
-        alias($._un_delimited_javascript_line, $.javascript),
-        $._newline,
-        $._indent,
-        repeat1(
-          $.when,
+      prec.right(
+        seq(
+          'case',
+          alias($._un_delimited_javascript_line, $.javascript),
+          $._newline,
+          $._indent,
+          repeat1(
+            $.when,
+          ),
         ),
       ),
     _when_content: ($) =>
@@ -85,14 +82,16 @@ module.exports = grammar({
         'default',
       ),
     when: ($) =>
-      seq(
-        $._when_keyword,
-        choice(
-          optional($._when_content),
-          // There are newlines between each when case, but not the last when
-          optional($._newline),
-        ),
+      prec.left(
+        seq(
+          $._when_keyword,
+          choice(
+            optional($._when_content),
+            // There are newlines between each when case, but not the last when
+            optional($._newline),
+          ),
         optional($._dedent)
+        ),
       ),
     unescaped_buffered_code: ($) =>
       seq(
@@ -273,9 +272,25 @@ module.exports = grammar({
         optional(seq("=", $.quoted_javascript))
       ),
 
+    // TODO: is the dedent here needed?
     children: ($) => prec.right(seq($._indent, repeat1($._children_choice), optional($._dedent))),
     // TODO: add all other types of element in here too
-    _children_choice: ($) => choice($.pipe, $.tag, $.conditional, $._newline),
+    _children_choice: ($) =>
+      prec(1,
+        choice(
+          $.buffered_code,
+          $.case,
+          $.comment,
+          $.conditional,
+          $.doctype,
+          $.pipe,
+          $.script_block,
+          $.tag,
+          $.unbuffered_code,
+          $.unescaped_buffered_code,
+          $._newline,
+        ),
+      ),
 
     comment: ($) =>
       seq(
@@ -291,7 +306,6 @@ module.exports = grammar({
                 optional($._newline),
               ),
             ),
-            optional($._dedent),
           ),
         ),
       ),

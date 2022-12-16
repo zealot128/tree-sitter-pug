@@ -78,8 +78,9 @@ tag
 (source_file
   (tag
     (tag_name)
+    (children
     (buffered_code
-      (javascript))))
+      (javascript)))))
 
 ============
 Buffered code single line without tag
@@ -132,8 +133,9 @@ tag
 (source_file
   (tag
     (tag_name)
+    (children
     (unescaped_buffered_code
-      (javascript))))
+      (javascript)))))
 
 ============
 Unescaped buffered code single line without tag

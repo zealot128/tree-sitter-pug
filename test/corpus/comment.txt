@@ -38,8 +38,9 @@ tag
 (source_file
   (tag
     (tag_name)
+    (children
     (unescaped_buffered_code
-      (javascript)))
+      (javascript))))
   (comment)
   (tag
     (tag_name)))
