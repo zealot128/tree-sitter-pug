@@ -94,7 +94,7 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "conditional",
@@ -133,11 +133,11 @@
       "required": true,
       "types": [
         {
-          "type": "javascript",
+          "type": "children",
           "named": true
         },
         {
-          "type": "tag",
+          "type": "javascript",
           "named": true
         }
       ]

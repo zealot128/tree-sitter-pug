@@ -14,15 +14,18 @@ else
 (source_file
   (conditional
     (javascript)
-    (tag
-      (tag_name)))
+    (children
+      (tag
+        (tag_name))))
   (conditional
     (javascript)
-    (tag
-      (tag_name)))
+    (children
+      (tag
+        (tag_name))))
   (conditional
-    (tag
-      (tag_name))))
+    (children
+      (tag
+        (tag_name)))))
 
 ============
 Conditional in tag
@@ -44,15 +47,18 @@ span
     (children
       (conditional
         (javascript)
-        (tag
-          (tag_name)))
+        (children
+          (tag
+            (tag_name))))
       (conditional
         (javascript)
-        (tag
-          (tag_name)))
+        (children
+          (tag
+            (tag_name))))
       (conditional
-        (tag
-          (tag_name))))))
+        (children
+          (tag
+            (tag_name)))))))
 
 ============
 Conditional in tag real example
@@ -75,22 +81,69 @@ Conditional in tag real example
     (children
       (conditional
         (javascript)
-        (tag
-          (tag_name)
-          (class)
-          (content)
-          (children
-            (tag
-              (tag_name)
-              (buffered_code
-                (javascript))))))
+        (children
+          (tag
+            (tag_name)
+            (class)
+            (content))
+          (tag
+            (tag_name)
+            (buffered_code
+              (javascript)))))
       (conditional
         (javascript)
-        (tag
-          (tag_name)
-          (content)))
+        (children
+          (tag
+            (tag_name)
+            (content))))
       (conditional
-        (tag
-          (tag_name)
-          (content))))))
+        (children
+          (tag
+            (tag_name)
+            (content)))))))
+
+
+============
+Conditional in tag real example with multiple indents and blank lines
+============
+
+#user
+  if user.description
+    h2 text
+    p text
+
+unless user.isAnonymous
+  p text
+  span content
+
+
+p
+
+
+---
+
+(source_file
+  (tag
+    (id)
+    (children
+      (conditional
+        (javascript)
+        (children
+          (tag
+            (tag_name)
+            (content))
+          (tag
+            (tag_name)
+            (content))))))
+  (conditional
+    (javascript)
+    (children
+      (tag
+        (tag_name)
+        (content))
+      (tag
+        (tag_name)
+        (content))))
+  (tag
+    (tag_name)))
 

@@ -1,6 +1,7 @@
 // TODO: support `tag(attr='hello' + goodbye)`
 // TODO: support multiple levels of function calls in pug js attrs: `tag(attr=true.call(false.toString()))`
 // TODO: don't break if there are singular { or # in content
+// TODO: add all other types of element to $._children_choice
 module.exports = grammar({
   name: "pug",
   externals: ($) => [$._newline, $._indent, $._dedent],
@@ -35,13 +36,14 @@ module.exports = grammar({
                 'unless',
               ),
               alias($._un_delimited_javascript, $.javascript),
+              $._newline,
             ),
             seq(
               'else',
               $._newline,
             ),
           ),
-          repeat1($.tag),
+          $.children,
         ),
       ),
     case: ($) =>
@@ -271,7 +273,8 @@ module.exports = grammar({
       ),
 
     children: ($) => prec.right(seq($._indent, repeat1($._children_choice), optional($._dedent))),
-    _children_choice: ($) => choice($.pipe, $.tag, $.conditional),
+    // TODO: add all other types of element in here too
+    _children_choice: ($) => choice($.pipe, $.tag, $.conditional, $._newline),
 
     comment: ($) =>
       seq(

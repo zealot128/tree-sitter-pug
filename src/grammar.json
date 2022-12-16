@@ -142,6 +142,10 @@
                     },
                     "named": true,
                     "value": "javascript"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "_newline"
                   }
                 ]
               },
@@ -161,11 +165,8 @@
             ]
           },
           {
-            "type": "REPEAT1",
-            "content": {
-              "type": "SYMBOL",
-              "name": "tag"
-            }
+            "type": "SYMBOL",
+            "name": "children"
           }
         ]
       }
@@ -1043,6 +1044,10 @@
         {
           "type": "SYMBOL",
           "name": "conditional"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_newline"
         }
       ]
     },
