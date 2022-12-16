@@ -137,11 +137,11 @@ module.exports = grammar({
             ),
             choice($.buffered_code, $.unescaped_buffered_code),
           ),
-          prec.left(seq(
+          seq(
             optional(seq(" ", $._content_or_javascript)),
             $._newline,
             optional($.children)
-          ))
+          )
         )
       ),
     _content_after_dot: ($) =>
