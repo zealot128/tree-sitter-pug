@@ -3,6 +3,15 @@
 // TODO: don't break if there are singular { or # in content
 // TODO: add all other types of element to $._children_choice
 // TODO: check if standalone .class divs are working properly
+// TODO: fix nested elements before `else` causing errors
+// TODO: support filters
+// TODO: check why single word multiline comments that don't start on the first line break after the first line
+// TODO: add extends keyword
+// TODO: add block keyword
+// TODO: add mixin keyword
+// TODO: add whatever the +list syntax is (mixins?)
+// TODO: add closing tags with /, e.g., `img(src=abc)/`
+// TODO: support #[p(prop)] nested pug syntax
 module.exports = grammar({
   name: "pug",
   externals: ($) => [$._newline, $._indent, $._dedent],
