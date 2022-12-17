@@ -291,21 +291,41 @@ module.exports = grammar({
       ),
 
     comment: ($) =>
-      seq(
-        choice("//", "//-"),
-        optional($._comment_content),
-        $._newline,
-        optional(
-          seq(
-            $._indent,
-            repeat1(
-              seq(
-                $._comment_content,
-                optional($._newline),
+      choice(
+        $._comment,
+        $._comment_not_first_line,
+      ),
+    _comment: ($) =>
+      prec.left(
+        seq(
+          choice("//", "//-"),
+          $._comment_content,
+          $._newline,
+          optional(
+            seq(
+              $._indent,
+              repeat1(
+                seq(
+                  $._comment_content,
+                  $._newline,
+                ),
               ),
             ),
           ),
         ),
+      ),
+    _comment_not_first_line: ($) =>
+      seq(
+        choice("//", "//-"),
+        $._newline,
+        $._indent,
+        repeat1(
+          seq(
+            $._comment_content,
+            $._newline,
+          ),
+        ),
+        $._dedent,
       ),
 
     tag_name: () => /\w(?:[-:\w]*\w)?/,
