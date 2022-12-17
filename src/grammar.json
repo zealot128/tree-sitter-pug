@@ -196,51 +196,49 @@
       }
     },
     "_when_content": {
-      "type": "PREC_RIGHT",
-      "value": 0,
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "SEQ",
-                "members": [
-                  {
-                    "type": "SYMBOL",
-                    "name": "_newline"
-                  },
-                  {
-                    "type": "SYMBOL",
-                    "name": "_indent"
-                  }
-                ]
-              },
-              {
-                "type": "STRING",
-                "value": ":"
-              }
-            ]
-          },
-          {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "REPEAT",
-                "content": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
                   "type": "SYMBOL",
-                  "name": "tag"
+                  "name": "_newline"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "children"
                 }
-              },
-              {
-                "type": "SYMBOL",
-                "name": "unbuffered_code"
-              }
-            ]
-          }
-        ]
-      }
+              ]
+            },
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": ":"
+                },
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "_dummy_tag"
+                  },
+                  "named": true,
+                  "value": "children"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "_dummy_tag": {
+      "type": "SYMBOL",
+      "name": "tag"
     },
     "_when_keyword": {
       "type": "CHOICE",
@@ -283,28 +281,12 @@
             "type": "CHOICE",
             "members": [
               {
-                "type": "CHOICE",
-                "members": [
-                  {
-                    "type": "SYMBOL",
-                    "name": "_when_content"
-                  },
-                  {
-                    "type": "BLANK"
-                  }
-                ]
+                "type": "SYMBOL",
+                "name": "_when_content"
               },
               {
-                "type": "CHOICE",
-                "members": [
-                  {
-                    "type": "SYMBOL",
-                    "name": "_newline"
-                  },
-                  {
-                    "type": "BLANK"
-                  }
-                ]
+                "type": "SYMBOL",
+                "name": "_newline"
               }
             ]
           },

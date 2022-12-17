@@ -16,9 +16,10 @@ case variable
       (javascript))
     (when
       (javascript)
-      (tag
-        (tag_name)
-        (content)))))
+      (children
+        (tag
+          (tag_name)
+          (content))))))
 
 ============
 Basic case statement with block expansion
@@ -36,18 +37,21 @@ case variable
     (javascript)
     (when
       (javascript)
-      (tag
-        (tag_name)
-        (content)))
+      (children
+        (tag
+          (tag_name)
+          (content))))
     (when
       (javascript)
-      (tag
-        (tag_name)
-        (content)))
+      (children
+        (tag
+          (tag_name)
+          (content))))
     (when
-      (tag
-        (tag_name)
-        (content)))))
+      (children
+        (tag
+          (tag_name)
+          (content))))))
 
 ============
 Basic case statement with default
@@ -69,13 +73,15 @@ case variable
       (javascript))
     (when
       (javascript)
-      (tag
-        (tag_name)
-        (content)))
+      (children
+        (tag
+          (tag_name)
+          (content))))
     (when
-      (tag
-        (tag_name)
-        (content)))))
+      (children
+        (tag
+          (tag_name)
+          (content))))))
 
 ============
 Basic case statement with default and break
@@ -96,17 +102,20 @@ case variable
     (javascript)
     (when
       (javascript)
-      (unbuffered_code
-        (javascript)))
+      (children
+        (unbuffered_code
+          (javascript))))
     (when
       (javascript)
-      (tag
-        (tag_name)
-        (content)))
+      (children
+        (tag
+          (tag_name)
+          (content))))
     (when
-      (tag
-        (tag_name)
-        (content)))))
+      (children
+        (tag
+          (tag_name)
+          (content))))))
 
 ============
 Case statement with javascript
@@ -126,9 +135,10 @@ case variable + another
       (javascript))
     (when
       (javascript)
-      (tag
-        (tag_name)
-        (content)))))
+      (children
+        (tag
+          (tag_name)
+          (content))))))
 
 ============
 Case statement followed by tag
@@ -138,6 +148,7 @@ case variable
   when 4
   when 2
     p tag content
+
 tag
 
 ---
@@ -149,9 +160,10 @@ tag
       (javascript))
     (when
       (javascript)
-      (tag
-        (tag_name)
-        (content))))
+      (children
+        (tag
+          (tag_name)
+          (content)))))
   (tag
     (tag_name)))
 
@@ -163,8 +175,9 @@ case variable
   when 4
   when 2
     p tag content
-  when 5
+  default
     p another tag
+
 tag
 
 ---
@@ -176,14 +189,15 @@ tag
       (javascript))
     (when
       (javascript)
-      (tag
-        (tag_name)
-        (content)))
+      (children
+        (tag
+          (tag_name)
+          (content))))
     (when
-      (javascript)
-      (tag
-        (tag_name)
-        (content))))
+      (children
+        (tag
+          (tag_name)
+          (content)))))
   (tag
     (tag_name)))
 

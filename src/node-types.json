@@ -409,15 +409,11 @@
       "required": false,
       "types": [
         {
+          "type": "children",
+          "named": true
+        },
+        {
           "type": "javascript",
-          "named": true
-        },
-        {
-          "type": "tag",
-          "named": true
-        },
-        {
-          "type": "unbuffered_code",
           "named": true
         }
       ]

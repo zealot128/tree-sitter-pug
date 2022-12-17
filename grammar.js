@@ -55,23 +55,21 @@ module.exports = grammar({
         ),
       ),
     _when_content: ($) =>
-      prec.right(
-        seq(
-          choice(
-            // Where the content is on the next line
-            seq(
-              $._newline,
-              $._indent,
-            ),
-            // Where the content follows a : on the same line
-            ':'
+      seq(
+        choice(
+          // Where the content is on the next line
+          seq(
+            $._newline,
+            $.children,
           ),
-          choice(
-            repeat($.tag),
-            $.unbuffered_code,
+          // Where the content follows a : on the same line
+          seq(
+            ':',
+            alias($._dummy_tag, $.children),
           ),
         ),
       ),
+    _dummy_tag: ($) => $.tag,
     _when_keyword: ($) =>
       choice(
         seq(
@@ -86,11 +84,11 @@ module.exports = grammar({
         seq(
           $._when_keyword,
           choice(
-            optional($._when_content),
+            $._when_content,
             // There are newlines between each when case, but not the last when
-            optional($._newline),
+            $._newline,
           ),
-        optional($._dedent)
+          optional($._dedent)
         ),
       ),
     unescaped_buffered_code: ($) =>
