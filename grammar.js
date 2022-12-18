@@ -1,9 +1,6 @@
 // TODO: support `tag(attr='hello' + goodbye)`
 // TODO: support multiple levels of function calls in pug js attrs: `tag(attr=true.call(false.toString()))`
 // TODO: don't break if there are singular { or # in content
-// TODO: add all other types of element to $._children_choice
-// TODO: check if standalone .class divs are working properly
-// TODO: check why single word multiline comments that don't start on the first line break after the first line
 // TODO: add extends keyword
 // TODO: add block keyword
 // TODO: add mixin keyword
