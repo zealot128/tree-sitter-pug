@@ -147,3 +147,43 @@ p
   (tag
     (tag_name)))
 
+
+============
+Conditional else following multi-level a element
+============
+
+tag
+  if user.description
+    h2 text
+      h2 text
+  else if test
+    h3 text
+
+p
+
+
+---
+
+(source_file
+  (tag
+    (tag_name)
+    (children
+      (conditional
+        (javascript)
+        (children
+          (tag
+            (tag_name)
+            (content)
+            (children
+              (tag
+                (tag_name)
+                (content))))))
+      (conditional
+        (javascript)
+        (children
+          (tag
+            (tag_name)
+            (content))))))
+  (tag
+    (tag_name)))
+

@@ -350,3 +350,27 @@ tag
   (tag
     (tag_name)))
 
+========================
+Tag with multiple levels followed by root tag
+========================
+
+tag
+  tag
+    tag
+
+tag
+
+---
+
+(source_file
+  (tag
+    (tag_name)
+    (children
+      (tag
+        (tag_name)
+        (children
+          (tag
+            (tag_name))))))
+  (tag
+    (tag_name)))
+

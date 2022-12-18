@@ -64,6 +64,9 @@ struct Scanner {
     if (lexer->lookahead && lexer->get_column(lexer) == 0) {
       uint32_t indent_length = 0;
 
+      // Indent tokens are zero width
+      lexer->mark_end(lexer);
+
       for (;;) {
         if (lexer->lookahead == ' ') {
           indent_length++;
