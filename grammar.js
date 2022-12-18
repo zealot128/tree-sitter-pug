@@ -347,9 +347,9 @@ module.exports = grammar({
 
     angular_attribute_name: () =>
       choice(
-        /\[[\w@\-:]+\]/,
-        /\([\w@\-:]+\)/,
-        /\*[\w@\-:]+/,
+        /\[[\w@\-:\.]+\]/,
+        /\([\w@\-:\.]+\)/,
+        /\*[\w@\-:\.]+/,
       ),
     attribute_name: () => /#?[\w@\-:]+/,
 
