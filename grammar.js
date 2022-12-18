@@ -3,7 +3,6 @@
 // TODO: don't break if there are singular { or # in content
 // TODO: add all other types of element to $._children_choice
 // TODO: check if standalone .class divs are working properly
-// TODO: support filters
 // TODO: check why single word multiline comments that don't start on the first line break after the first line
 // TODO: add extends keyword
 // TODO: add block keyword
@@ -26,12 +25,45 @@ module.exports = grammar({
         $.unescaped_buffered_code,
         $.case,
         $.pipe,
+        $.filter,
       ),
     ),
     doctype: ($) =>
       seq("doctype", alias(choice("html", "strict", "xml"), $.doctype_name)),
     pipe: ($) =>
       seq("|", optional($._content_or_javascript), $._newline),
+
+    filter: ($) =>
+      prec.right(
+        seq(
+          ':',
+          $.filter_name,
+          optional($.attributes),
+          optional(
+            alias($.filter_content, $.content),
+          ),
+      ),
+    ),
+    filter_name: () => /[\w-]+/,
+    filter_content: ($) =>
+      choice(
+        $.filter,
+        seq(
+          /( |\t)+/,
+          /[^\n]*/,
+        ),
+        seq(
+          $._newline,
+          $._indent,
+          repeat(
+            seq(
+              /[^\n]*/,
+              $._newline,
+            ),
+          ),
+          $._dedent,
+        )
+      ),
 
     conditional: ($) =>
       seq(
@@ -299,6 +331,7 @@ module.exports = grammar({
           $.tag,
           $.unbuffered_code,
           $.unescaped_buffered_code,
+          $.filter,
           $._newline,
         ),
       ),
