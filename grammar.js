@@ -9,7 +9,6 @@
 // TODO: add block keyword
 // TODO: add mixin keyword
 // TODO: add whatever the +list syntax is (mixins?)
-// TODO: add closing tags with /, e.g., `img(src=abc)/`
 // TODO: support #[p(prop)] nested pug syntax
 module.exports = grammar({
   name: "pug",
@@ -130,6 +129,7 @@ module.exports = grammar({
         choice($.tag_name, $.id, $.class),
         optional(repeat1(choice($.id, $.class))),
         optional($.attributes),
+        optional(alias('/', $.self_close_slash)),
         choice(
           seq(":", $.tag),
           $._content_after_dot,

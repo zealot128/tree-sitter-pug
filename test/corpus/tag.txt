@@ -374,3 +374,35 @@ tag
   (tag
     (tag_name)))
 
+============
+Tag with self-closing slash
+============
+
+some-tag/
+  img(src='foo')/
+    img/
+
+img
+
+---
+
+(source_file
+  (tag
+    (tag_name)
+    (self_close_slash)
+    (children
+      (tag
+        (tag_name)
+        (attributes
+          (attribute
+            (attribute_name)
+            (quoted_attribute_value
+              (attribute_value))))
+        (self_close_slash)
+        (children
+          (tag
+            (tag_name)
+            (self_close_slash))))))
+  (tag
+    (tag_name)))
+

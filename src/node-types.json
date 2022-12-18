@@ -348,6 +348,10 @@
           "named": true
         },
         {
+          "type": "self_close_slash",
+          "named": true
+        },
+        {
           "type": "tag",
           "named": true
         },
@@ -526,6 +530,10 @@
   {
     "type": "script.",
     "named": false
+  },
+  {
+    "type": "self_close_slash",
+    "named": true
   },
   {
     "type": "tag_name",
