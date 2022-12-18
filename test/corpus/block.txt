@@ -1,0 +1,153 @@
+========================
+Extends basic definition
+=========================
+
+extends file.pug
+
+block name
+  tag
+    tag
+
+tag
+
+---
+
+(source_file
+  (extends
+    (filename))
+  (block_definition
+    (block_name)
+    (children
+      (tag
+        (tag_name)
+        (children
+          (tag
+            (tag_name))))))
+  (tag
+    (tag_name)))
+
+========================
+Extends block nesting
+=========================
+
+extends file.pug
+
+block name
+  tag
+    tag
+  block otherblock
+    tag
+tag
+
+---
+
+(source_file
+  (extends
+    (filename))
+  (block_definition
+    (block_name)
+    (children
+      (tag
+        (tag_name)
+        (children
+          (tag
+            (tag_name))))
+      (block_definition
+        (block_name))
+      (tag
+        (tag_name))))
+  (tag
+    (tag_name)))
+
+
+========================
+Extends block append
+=========================
+
+extends file.pug
+
+block name
+  tag
+block append name
+  tag
+    tag
+  append name
+    tag
+      tag
+
+tag
+
+---
+
+(source_file
+  (extends
+    (filename))
+  (block_definition
+    (block_name)
+    (children
+      (tag
+        (tag_name))))
+  (block_append
+    (block_name)
+    (children
+      (tag
+        (tag_name)
+        (children
+          (tag
+            (tag_name))))
+      (block_append
+        (block_name))
+      (tag
+        (tag_name)
+        (children
+          (tag
+            (tag_name))))))
+  (tag
+    (tag_name)))
+
+
+========================
+Extends block prepend
+=========================
+
+extends file.pug
+
+block name
+  tag
+block prepend name
+  tag
+    tag
+  prepend name
+    tag
+      tag
+
+tag
+
+---
+
+(source_file
+  (extends
+    (filename))
+  (block_definition
+    (block_name)
+    (children
+      (tag
+        (tag_name))))
+  (block_prepend
+    (block_name)
+    (children
+      (tag
+        (tag_name)
+        (children
+          (tag
+            (tag_name))))
+      (block_prepend
+        (block_name))
+      (tag
+        (tag_name)
+        (children
+          (tag
+            (tag_name))))))
+  (tag
+    (tag_name)))
+

@@ -51,6 +51,63 @@
     }
   },
   {
+    "type": "block_append",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "block_name",
+          "named": true
+        },
+        {
+          "type": "children",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "block_definition",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "block_name",
+          "named": true
+        },
+        {
+          "type": "children",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "block_prepend",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "block_name",
+          "named": true
+        },
+        {
+          "type": "children",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "buffered_code",
     "named": true,
     "fields": {},
@@ -97,6 +154,18 @@
       "required": false,
       "types": [
         {
+          "type": "block_append",
+          "named": true
+        },
+        {
+          "type": "block_definition",
+          "named": true
+        },
+        {
+          "type": "block_prepend",
+          "named": true
+        },
+        {
           "type": "buffered_code",
           "named": true
         },
@@ -118,6 +187,10 @@
         },
         {
           "type": "doctype",
+          "named": true
+        },
+        {
+          "type": "extends",
           "named": true
         },
         {
@@ -200,6 +273,21 @@
       "types": [
         {
           "type": "doctype_name",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "extends",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "filename",
           "named": true
         }
       ]
@@ -306,6 +394,18 @@
       "required": false,
       "types": [
         {
+          "type": "block_append",
+          "named": true
+        },
+        {
+          "type": "block_definition",
+          "named": true
+        },
+        {
+          "type": "block_prepend",
+          "named": true
+        },
+        {
           "type": "buffered_code",
           "named": true
         },
@@ -323,6 +423,10 @@
         },
         {
           "type": "doctype",
+          "named": true
+        },
+        {
+          "type": "extends",
           "named": true
         },
         {
@@ -525,11 +629,23 @@
     "named": false
   },
   {
+    "type": "append",
+    "named": false
+  },
+  {
     "type": "attribute_modifier",
     "named": true
   },
   {
     "type": "attribute_value",
+    "named": true
+  },
+  {
+    "type": "block",
+    "named": false
+  },
+  {
+    "type": "block_name",
     "named": true
   },
   {
@@ -561,6 +677,14 @@
     "named": false
   },
   {
+    "type": "extends",
+    "named": false
+  },
+  {
+    "type": "filename",
+    "named": true
+  },
+  {
     "type": "filter_name",
     "named": true
   },
@@ -570,6 +694,10 @@
   },
   {
     "type": "if",
+    "named": false
+  },
+  {
+    "type": "prepend",
     "named": false
   },
   {

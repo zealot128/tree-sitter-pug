@@ -1,8 +1,6 @@
 // TODO: support `tag(attr='hello' + goodbye)`
 // TODO: support multiple levels of function calls in pug js attrs: `tag(attr=true.call(false.toString()))`
 // TODO: don't break if there are singular { or # in content
-// TODO: add extends keyword
-// TODO: add block keyword
 // TODO: add mixin keyword
 // TODO: add whatever the +list syntax is (mixins?)
 // TODO: support #[p(prop)] nested pug syntax
@@ -23,12 +21,51 @@ module.exports = grammar({
         $.case,
         $.pipe,
         $.filter,
+        $.block_definition,
+        $.block_append,
+        $.block_prepend,
+        $.extends,
       ),
     ),
     doctype: ($) =>
       seq("doctype", alias(choice("html", "strict", "xml"), $.doctype_name)),
     pipe: ($) =>
       seq("|", optional($._content_or_javascript), $._newline),
+
+    _block_content: ($) =>
+      prec.left(
+        seq(
+          alias($.tag_name, $.block_name),
+          optional(
+            seq(
+              $._newline,
+              $.children,
+            )
+          ),
+        ),
+      ),
+    block_definition: ($) =>
+      seq(
+        'block',
+        $._block_content,
+      ),
+    block_append: ($) =>
+      seq(
+        optional('block'),
+        'append',
+        $._block_content,
+      ),
+    block_prepend: ($) =>
+      seq(
+        optional('block'),
+        'prepend',
+        $._block_content,
+      ),
+    extends: ($) =>
+      seq(
+        'extends',
+        alias(/[\w.]+/, $.filename),
+      ),
 
     filter: ($) =>
       prec.right(
@@ -329,6 +366,10 @@ module.exports = grammar({
           $.unbuffered_code,
           $.unescaped_buffered_code,
           $.filter,
+          $.block_definition,
+          $.block_append,
+          $.block_prepend,
+          $.extends,
           $._newline,
         ),
       ),
