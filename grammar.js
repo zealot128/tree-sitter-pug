@@ -278,7 +278,6 @@ module.exports = grammar({
         optional(seq("=", $.quoted_javascript))
       ),
 
-    // TODO: is the dedent here needed?
     children: ($) => prec.right(
       seq(
         $._indent,
