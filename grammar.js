@@ -279,7 +279,13 @@ module.exports = grammar({
       ),
 
     // TODO: is the dedent here needed?
-    children: ($) => prec.right(seq($._indent, repeat1($._children_choice), optional($._dedent))),
+    children: ($) => prec.right(
+      seq(
+        $._indent,
+        repeat1($._children_choice),
+        optional($._dedent),
+      ),
+    ),
     // TODO: add all other types of element in here too
     _children_choice: ($) =>
       prec(1,
