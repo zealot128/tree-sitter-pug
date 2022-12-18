@@ -435,7 +435,7 @@ module.exports = grammar({
         seq('"', optional(alias(/[^"]+/, $.attribute_value)), '"')
       ),
 
-    content: ($) =>
+    content: () =>
       prec.right(
         repeat1(
           seq(
@@ -464,7 +464,7 @@ module.exports = grammar({
       ),
 
     // TODO: can _delimited_javascript and _un_delimited_javascript be merged?
-    _delimited_javascript: ($) => /[^\n}]+/,
+    _delimited_javascript: () => /[^\n}]+/,
     // I only want this node to be exposed sometimes
     _un_delimited_javascript: ($) => $._un_delimited_javascript_line,
     _un_delimited_javascript_line: ($) => /(.)+?/,
