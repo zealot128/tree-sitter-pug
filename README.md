@@ -2,25 +2,16 @@
 
 This is a tree-sitter parser grammar for the [pug](https://github.com/pugjs/pug) language.
 
-For now this is intended to be used **for a vue+pug** setup, as the control flow operations aren't recognized by the parser (since they are not used in conjunction with vue).
+This is intended to be used along side Angular, but my aim is to eventually support all pug features.
 
-## Contributing
+## Current state
 
-If you'd like to contribute the missing grammar, feel free to fork/PR:
+Everything currently included is relatively bug-free, but I'm not happy with the structure of some of the rules, so the structure will change before I'm finished.
 
-currently missing:
+There is an incomplete list of todos in `grammar.js`, but the summary is: all the basics are supported; only some of the complex syntaxes shouldn't be used alongside Angular are missing.
+I have tests for every scenario supported, so you can just have a look through `./test/corpus/*.txt`.
 
-- [ ] Control Flow (if, each, else, case, include...)
-  https://pugjs.org/language/conditionals.html
-  https://pugjs.org/language/includes.html
-- [ ] inline Javascript code with "- "
-- [ ] output Javascript code with "= "
-  https://pugjs.org/language/code.html
-- [ ] inline Javascript code with "#{...}"
-- [ ] Filters
-
-
-To add tests, check out `./test/corpus/*.txt`
+## Developing
 
 How to run & test:
 
