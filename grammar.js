@@ -1,8 +1,6 @@
 // TODO: support `tag(attr='hello' + goodbye)`
 // TODO: support multiple levels of function calls in pug js attrs: `tag(attr=true.call(false.toString()))`
 // TODO: don't break if there are singular { or # in content
-// TODO: add mixin keyword
-// TODO: add whatever the +list syntax is (mixins?)
 // TODO: support #[p(prop)] nested pug syntax
 module.exports = grammar({
   name: "pug",
@@ -25,12 +23,61 @@ module.exports = grammar({
         $.block_append,
         $.block_prepend,
         $.extends,
+        $.mixin_definition,
+        $.mixin_use,
       ),
     ),
     doctype: ($) =>
       seq("doctype", alias(choice("html", "strict", "xml"), $.doctype_name)),
     pipe: ($) =>
       seq("|", optional($._content_or_javascript), $._newline),
+
+    mixin_use: ($) =>
+      seq(
+        '+',
+        alias($.tag_name, $.mixin_name),
+        optional(
+          seq(
+            '(',
+            optional(
+              seq(
+                repeat(
+                  seq(
+                    alias($._pug_attributes, $.attribute),
+                    ',',
+                  )
+                ),
+                alias($._pug_attributes, $.attribute),
+              )
+            ),
+            ')',
+          ),
+        ),
+      ),
+    mixin_definition: ($) =>
+      seq(
+        'mixin',
+        alias($.tag_name, $.mixin_name),
+        optional($.mixin_attributes),
+        $._newline,
+        $.children,
+      ),
+    mixin_attributes: ($) =>
+      seq(
+        '(',
+        optional(
+          seq(
+            repeat(
+              seq(
+                alias(/\w+/, $.attribute_name),
+                ',',
+              )
+            ),
+            alias(/\w+/, $.attribute_name),
+          )
+        ),
+        ')',
+      ),
 
     _block_content: ($) =>
       prec.left(
@@ -247,7 +294,6 @@ module.exports = grammar({
       ),
     _ternary_attribute_value: ($) =>
       seq(
-        "=",
         alias(
           token(
             seq(
@@ -268,22 +314,17 @@ module.exports = grammar({
         ),
       ),
     _string_attribute_value: ($) =>
-      seq(
-        "=",
-        $.quoted_attribute_value
-      ),
+      $.quoted_attribute_value,
     _variable_attribute_value: ($) =>
       seq(
-        "=",
         alias(
           // No function calls, nor spaces allowed in javascript attributes
-          /[^'"{\[][^ ()]+(\([^)]*?\))?/,
+          /[^'"{\[][^ ,()]+(\([^)]*?\))?/,
           $.javascript
         ),
       ),
     _object_attribute_value: ($) =>
       seq(
-        "=",
         alias(
           token(
             seq(
@@ -297,7 +338,6 @@ module.exports = grammar({
       ),
     _template_attribute_value: ($) =>
       seq(
-        "=",
         alias(
           token(
             seq(
@@ -311,7 +351,6 @@ module.exports = grammar({
       ),
     _array_attribute_value: ($) =>
       seq(
-        "=",
         alias(
           token(
             seq(
@@ -323,19 +362,24 @@ module.exports = grammar({
           $.javascript,
         ),
       ),
+      _pug_attributes: ($) =>
+        choice(
+          $._string_attribute_value,
+          $._ternary_attribute_value,
+          $._variable_attribute_value,
+          $._array_attribute_value,
+          $._object_attribute_value,
+          $._template_attribute_value,
+        ),
     _attribute: ($) =>
       seq(
         $.attribute_name,
         optional(repeat1(seq(".", alias(/[\w@\-:]+/, $.attribute_modifier)))),
         optional(
-          choice(
-            $._string_attribute_value,
-            $._ternary_attribute_value,
-            $._variable_attribute_value,
-            $._array_attribute_value,
-            $._object_attribute_value,
-            $._template_attribute_value,
-          ),
+          seq(
+            '=',
+            $._pug_attributes
+          )
         ),
       ),
     _angular_attribute: ($) =>

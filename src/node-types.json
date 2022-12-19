@@ -322,6 +322,63 @@
     "fields": {}
   },
   {
+    "type": "mixin_attributes",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "attribute_name",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "mixin_definition",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "children",
+          "named": true
+        },
+        {
+          "type": "mixin_attributes",
+          "named": true
+        },
+        {
+          "type": "mixin_name",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "mixin_use",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "attribute",
+          "named": true
+        },
+        {
+          "type": "mixin_name",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "pipe",
     "named": true,
     "fields": {},
@@ -431,6 +488,14 @@
         },
         {
           "type": "filter",
+          "named": true
+        },
+        {
+          "type": "mixin_definition",
+          "named": true
+        },
+        {
+          "type": "mixin_use",
           "named": true
         },
         {
@@ -601,6 +666,10 @@
     "named": false
   },
   {
+    "type": "+",
+    "named": false
+  },
+  {
     "type": ",",
     "named": false
   },
@@ -695,6 +764,14 @@
   {
     "type": "if",
     "named": false
+  },
+  {
+    "type": "mixin",
+    "named": false
+  },
+  {
+    "type": "mixin_name",
+    "named": true
   },
   {
     "type": "prepend",
