@@ -510,7 +510,7 @@ module.exports = grammar({
         $._dedent,
       ),
 
-    tag_name: () => /\w(?:[-:\w]*\w)?/,
+    tag_name: () => /\w(?:[-\w]*\w)?/,
     class: () => /\.[_a-z0-9\-]*[_a-zA-Z][_a-zA-Z0-9\-]*/i,
     id: () => /#[\w-]+/,
 
