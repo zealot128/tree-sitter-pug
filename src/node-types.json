@@ -65,6 +65,10 @@
         {
           "type": "children",
           "named": true
+        },
+        {
+          "type": "keyword",
+          "named": true
         }
       ]
     }
@@ -84,6 +88,10 @@
         {
           "type": "children",
           "named": true
+        },
+        {
+          "type": "keyword",
+          "named": true
         }
       ]
     }
@@ -102,6 +110,10 @@
         },
         {
           "type": "children",
+          "named": true
+        },
+        {
+          "type": "keyword",
           "named": true
         }
       ]
@@ -136,6 +148,10 @@
       "types": [
         {
           "type": "javascript",
+          "named": true
+        },
+        {
+          "type": "keyword",
           "named": true
         },
         {
@@ -256,6 +272,10 @@
         {
           "type": "javascript",
           "named": true
+        },
+        {
+          "type": "keyword",
+          "named": true
         }
       ]
     }
@@ -313,6 +333,10 @@
         {
           "type": "iteration_variable",
           "named": true
+        },
+        {
+          "type": "keyword",
+          "named": true
         }
       ]
     }
@@ -322,11 +346,15 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
         {
           "type": "children",
+          "named": true
+        },
+        {
+          "type": "keyword",
           "named": true
         }
       ]
@@ -337,11 +365,15 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
         {
           "type": "filename",
+          "named": true
+        },
+        {
+          "type": "keyword",
           "named": true
         }
       ]
@@ -384,6 +416,10 @@
         },
         {
           "type": "filter",
+          "named": true
+        },
+        {
+          "type": "keyword",
           "named": true
         }
       ]
@@ -449,6 +485,10 @@
       "types": [
         {
           "type": "children",
+          "named": true
+        },
+        {
+          "type": "keyword",
           "named": true
         },
         {
@@ -735,7 +775,7 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "children",
@@ -743,6 +783,10 @@
         },
         {
           "type": "javascript",
+          "named": true
+        },
+        {
+          "type": "keyword",
           "named": true
         }
       ]
@@ -762,6 +806,10 @@
         },
         {
           "type": "iteration_iterator",
+          "named": true
+        },
+        {
+          "type": "keyword",
           "named": true
         }
       ]
@@ -832,10 +880,6 @@
     "named": false
   },
   {
-    "type": "append",
-    "named": false
-  },
-  {
     "type": "attribute_modifier",
     "named": true
   },
@@ -844,24 +888,12 @@
     "named": true
   },
   {
-    "type": "block",
-    "named": false
-  },
-  {
     "type": "block_name",
     "named": true
   },
   {
-    "type": "case",
-    "named": false
-  },
-  {
     "type": "class",
     "named": true
-  },
-  {
-    "type": "default",
-    "named": false
   },
   {
     "type": "doctype",
@@ -872,22 +904,6 @@
     "named": true
   },
   {
-    "type": "each",
-    "named": false
-  },
-  {
-    "type": "else",
-    "named": false
-  },
-  {
-    "type": "else if",
-    "named": false
-  },
-  {
-    "type": "extends",
-    "named": false
-  },
-  {
     "type": "filename",
     "named": true
   },
@@ -896,36 +912,16 @@
     "named": true
   },
   {
-    "type": "for",
-    "named": false
-  },
-  {
     "type": "id",
     "named": true
   },
   {
-    "type": "if",
-    "named": false
-  },
-  {
-    "type": "in",
-    "named": false
-  },
-  {
-    "type": "include",
-    "named": false
-  },
-  {
-    "type": "mixin",
-    "named": false
+    "type": "keyword",
+    "named": true
   },
   {
     "type": "mixin_name",
     "named": true
-  },
-  {
-    "type": "prepend",
-    "named": false
   },
   {
     "type": "script.",
@@ -938,18 +934,6 @@
   {
     "type": "tag_name",
     "named": true
-  },
-  {
-    "type": "unless",
-    "named": false
-  },
-  {
-    "type": "when",
-    "named": false
-  },
-  {
-    "type": "while",
-    "named": false
   },
   {
     "type": "{",
