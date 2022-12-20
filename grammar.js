@@ -163,7 +163,7 @@ module.exports = grammar({
     extends: ($) =>
       seq(
         'extends',
-        alias(/[\w.]+/, $.filename),
+        alias(/[^\n]+/, $.filename),
       ),
 
     filter: ($) =>
