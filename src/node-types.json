@@ -190,6 +190,10 @@
           "named": true
         },
         {
+          "type": "each",
+          "named": true
+        },
+        {
           "type": "extends",
           "named": true
         },
@@ -219,6 +223,10 @@
         },
         {
           "type": "unescaped_buffered_code",
+          "named": true
+        },
+        {
+          "type": "while",
           "named": true
         }
       ]
@@ -279,6 +287,48 @@
     }
   },
   {
+    "type": "each",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "children",
+          "named": true
+        },
+        {
+          "type": "else",
+          "named": true
+        },
+        {
+          "type": "iteration_iterator",
+          "named": true
+        },
+        {
+          "type": "iteration_variable",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "else",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "children",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "extends",
     "named": true,
     "fields": {},
@@ -311,6 +361,36 @@
         },
         {
           "type": "filter_name",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "iteration_iterator",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "javascript",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "iteration_variable",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "javascript",
           "named": true
         }
       ]
@@ -483,6 +563,10 @@
           "named": true
         },
         {
+          "type": "each",
+          "named": true
+        },
+        {
           "type": "extends",
           "named": true
         },
@@ -516,6 +600,10 @@
         },
         {
           "type": "unescaped_buffered_code",
+          "named": true
+        },
+        {
+          "type": "while",
           "named": true
         }
       ]
@@ -634,6 +722,25 @@
     }
   },
   {
+    "type": "while",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "children",
+          "named": true
+        },
+        {
+          "type": "iteration_iterator",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": " ",
     "named": false
   },
@@ -738,6 +845,10 @@
     "named": true
   },
   {
+    "type": "each",
+    "named": false
+  },
+  {
     "type": "else",
     "named": false
   },
@@ -758,11 +869,19 @@
     "named": true
   },
   {
+    "type": "for",
+    "named": false
+  },
+  {
     "type": "id",
     "named": true
   },
   {
     "type": "if",
+    "named": false
+  },
+  {
+    "type": "in",
     "named": false
   },
   {
@@ -795,6 +914,10 @@
   },
   {
     "type": "when",
+    "named": false
+  },
+  {
+    "type": "while",
     "named": false
   },
   {

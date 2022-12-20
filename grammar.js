@@ -25,12 +25,64 @@ module.exports = grammar({
         $.extends,
         $.mixin_definition,
         $.mixin_use,
+        $.each,
+        $.while,
       ),
     ),
     doctype: ($) =>
       seq("doctype", alias(choice("html", "strict", "xml"), $.doctype_name)),
     pipe: ($) =>
       seq("|", optional($._content_or_javascript), $._newline),
+
+    while: ($) =>
+      seq(
+        'while',
+        $.iteration_iterator,
+        $._newline,
+        $.children,
+      ),
+
+    _each_js: ($) =>
+      alias(/[\w_]+/, $.javascript),
+
+    iteration_variable: ($) =>
+      seq(
+        $._each_js,
+        optional(
+          seq(
+            ',',
+            $._each_js,
+          ),
+        ),
+      ),
+
+    iteration_iterator: ($) =>
+      alias(/[^\n]+/, $.javascript),
+
+    _each_else: ($) =>
+      seq(
+        'else',
+        $._newline,
+        $.children,
+      ),
+
+    each: ($) =>
+      prec.right(
+        seq(
+          choice('each', 'for'),
+          $.iteration_variable,
+          'in',
+          $.iteration_iterator,
+          $._newline,
+          $.children,
+          alias(
+            optional(
+              $._each_else
+            ),
+            $.else
+          ),
+        ),
+      ),
 
     mixin_use: ($) =>
       seq(
@@ -414,6 +466,8 @@ module.exports = grammar({
           $.block_append,
           $.block_prepend,
           $.extends,
+          $.each,
+          $.while,
           $._newline,
         ),
       ),
