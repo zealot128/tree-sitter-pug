@@ -81,6 +81,10 @@
           {
             "type": "SYMBOL",
             "name": "while"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "include"
           }
         ]
       }
@@ -138,6 +142,36 @@
         {
           "type": "SYMBOL",
           "name": "_newline"
+        }
+      ]
+    },
+    "include": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "include"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "filter"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "PATTERN",
+            "value": "[^\\n]+"
+          },
+          "named": true,
+          "value": "filename"
         }
       ]
     },
@@ -575,7 +609,7 @@
           "type": "ALIAS",
           "content": {
             "type": "PATTERN",
-            "value": "[\\w.]+"
+            "value": "[^\\n]+"
           },
           "named": true,
           "value": "filename"
@@ -1662,6 +1696,10 @@
           },
           {
             "type": "SYMBOL",
+            "name": "include"
+          },
+          {
+            "type": "SYMBOL",
             "name": "_newline"
           }
         ]
@@ -1791,7 +1829,7 @@
     },
     "tag_name": {
       "type": "PATTERN",
-      "value": "\\w(?:[-:\\w]*\\w)?"
+      "value": "\\w(?:[-\\w]*\\w)?"
     },
     "class": {
       "type": "PATTERN",

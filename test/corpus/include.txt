@@ -1,0 +1,32 @@
+========================
+Basic include
+========================
+
+include folder/file.pug
+
+tag
+
+---
+
+(source_file
+  (include
+    (filename))
+  (tag
+    (tag_name)))
+
+========================
+Include with filter
+========================
+
+include:filter:filter folder/file.pug
+
+tag
+
+---
+
+(source_file
+  (include
+    (filename))
+  (tag
+    (tag_name)))
+

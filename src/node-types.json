@@ -202,6 +202,10 @@
           "named": true
         },
         {
+          "type": "include",
+          "named": true
+        },
+        {
           "type": "javascript",
           "named": true
         },
@@ -361,6 +365,25 @@
         },
         {
           "type": "filter_name",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "include",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "filename",
+          "named": true
+        },
+        {
+          "type": "filter",
           "named": true
         }
       ]
@@ -572,6 +595,10 @@
         },
         {
           "type": "filter",
+          "named": true
+        },
+        {
+          "type": "include",
           "named": true
         },
         {
@@ -882,6 +909,10 @@
   },
   {
     "type": "in",
+    "named": false
+  },
+  {
+    "type": "include",
     "named": false
   },
   {

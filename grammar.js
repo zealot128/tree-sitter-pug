@@ -27,12 +27,20 @@ module.exports = grammar({
         $.mixin_use,
         $.each,
         $.while,
+        $.include,
       ),
     ),
     doctype: ($) =>
       seq("doctype", alias(choice("html", "strict", "xml"), $.doctype_name)),
     pipe: ($) =>
       seq("|", optional($._content_or_javascript), $._newline),
+
+    include: ($) =>
+      seq(
+        'include',
+        optional($.filter),
+        alias(/[^\n]+/, $.filename),
+      ),
 
     while: ($) =>
       seq(
@@ -468,6 +476,7 @@ module.exports = grammar({
           $.extends,
           $.each,
           $.while,
+          $.include,
           $._newline,
         ),
       ),
