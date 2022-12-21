@@ -501,6 +501,7 @@ module.exports = grammar({
                   $._newline,
                 ),
               ),
+              $._dedent,
             ),
           ),
         ),

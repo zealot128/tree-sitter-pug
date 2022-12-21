@@ -18,10 +18,14 @@ Multiline comment
   with nested line that
   are still commented
 
+tag
+
 ---
 
 (source_file
-  (comment))
+  (comment)
+  (tag
+    (tag_name)))
 
 ========================
 Multiline comment following buffered code

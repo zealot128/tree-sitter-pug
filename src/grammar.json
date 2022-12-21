@@ -1770,6 +1770,10 @@
                         }
                       ]
                     }
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "_dedent"
                   }
                 ]
               },
