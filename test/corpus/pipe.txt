@@ -186,6 +186,8 @@ div.
   more
   content here,
 
+tag
+
 ---
 
 (source_file
@@ -194,5 +196,6 @@ div.
     (children
       (content)
       (content)
-      (content))
-    (MISSING _dedent)))
+      (content)))
+  (tag
+    (tag_name)))

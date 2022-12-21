@@ -318,8 +318,9 @@ Tag with dot content same line
 ========================
 
 tag.
-    text
-  tag
+  text
+
+tag
 
 ---
 
