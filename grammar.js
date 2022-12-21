@@ -334,10 +334,10 @@ module.exports = grammar({
         $._newline,
         $._indent,
         alias(
-          repeat1(seq($._content_or_javascript, $._newline)),
+          repeat1(seq(optional($._content_or_javascript), $._newline)),
           $.children
         ),
-        $._dedent
+        $._dedent,
       ),
 
     attributes: ($) =>
