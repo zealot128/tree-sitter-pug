@@ -37,14 +37,14 @@ module.exports = grammar({
 
     include: ($) =>
       seq(
-        'include',
+        alias('include', $.keyword),
         optional($.filter),
         alias(/[^\n]+/, $.filename),
       ),
 
     while: ($) =>
       seq(
-        'while',
+        alias('while', $.keyword),
         $.iteration_iterator,
         $._newline,
         $.children,
@@ -69,7 +69,7 @@ module.exports = grammar({
 
     _each_else: ($) =>
       seq(
-        'else',
+        alias('else', $.keyword),
         $._newline,
         $.children,
       ),
@@ -77,9 +77,9 @@ module.exports = grammar({
     each: ($) =>
       prec.right(
         seq(
-          choice('each', 'for'),
+          alias(choice('each', 'for'), $.keyword),
           $.iteration_variable,
-          'in',
+          alias('in', $.keyword),
           $.iteration_iterator,
           $._newline,
           $.children,
@@ -116,7 +116,7 @@ module.exports = grammar({
       ),
     mixin_definition: ($) =>
       seq(
-        'mixin',
+        alias('mixin', $.keyword),
         alias($.tag_name, $.mixin_name),
         optional($.mixin_attributes),
         $._newline,
@@ -153,24 +153,24 @@ module.exports = grammar({
       ),
     block_definition: ($) =>
       seq(
-        'block',
+        alias('block', $.keyword),
         $._block_content,
       ),
     block_append: ($) =>
       seq(
-        optional('block'),
-        'append',
+        alias(optional('block'), $.keyword),
+        alias('append', $.keyword),
         $._block_content,
       ),
     block_prepend: ($) =>
       seq(
-        optional('block'),
-        'prepend',
+        alias(optional('block'), $.keyword),
+        alias('prepend', $.keyword),
         $._block_content,
       ),
     extends: ($) =>
       seq(
-        'extends',
+        alias('extends', $.keyword),
         alias(/[^\n]+/, $.filename),
       ),
 
@@ -210,14 +210,17 @@ module.exports = grammar({
       seq(
         choice(
           seq(
-            choice(
-              'unless',
-              'if',
-              'else if',
+            alias(
+              choice(
+                'unless',
+                'if',
+                'else if',
+              ),
+              $.keyword,
             ),
             alias($._un_delimited_javascript, $.javascript),
           ),
-          'else',
+          alias('else', $.keyword),
         ),
         $._newline,
         $.children,
@@ -225,7 +228,7 @@ module.exports = grammar({
     case: ($) =>
       prec.right(
         seq(
-          'case',
+          alias('case', $.keyword),
           alias($._un_delimited_javascript_line, $.javascript),
           $._newline,
           $._indent,
@@ -253,11 +256,11 @@ module.exports = grammar({
     _when_keyword: ($) =>
       choice(
         seq(
-          'when',
+          alias('when', $.keyword),
           // `when`s don't work with properly with objects, so removing : from regex is fine.
           alias(/[^:\n]+?/, $.javascript),
         ),
-        'default',
+        alias('default', $.keyword),
       ),
     when: ($) =>
       prec.left(

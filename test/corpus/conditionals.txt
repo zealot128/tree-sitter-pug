@@ -1,6 +1,6 @@
-============
+================================================================================
 Conditional
-============
+================================================================================
 
 if user.description
   tag
@@ -9,27 +9,30 @@ else if authorised
 else
   tag
 
----
+--------------------------------------------------------------------------------
 
 (source_file
   (conditional
+    (keyword)
     (javascript)
     (children
       (tag
         (tag_name))))
   (conditional
+    (keyword)
     (javascript)
     (children
       (tag
         (tag_name))))
   (conditional
+    (keyword)
     (children
       (tag
         (tag_name)))))
 
-============
+================================================================================
 Conditional in tag
-============
+================================================================================
 
 span
   if user.description
@@ -39,30 +42,33 @@ span
   else
     tag
 
----
+--------------------------------------------------------------------------------
 
 (source_file
   (tag
     (tag_name)
     (children
       (conditional
+        (keyword)
         (javascript)
         (children
           (tag
             (tag_name))))
       (conditional
+        (keyword)
         (javascript)
         (children
           (tag
             (tag_name))))
       (conditional
+        (keyword)
         (children
           (tag
             (tag_name)))))))
 
-============
+================================================================================
 Conditional in tag real example
-============
+================================================================================
 
 #user
   if user.description
@@ -73,13 +79,14 @@ Conditional in tag real example
   else
     span content
 
----
+--------------------------------------------------------------------------------
 
 (source_file
   (tag
     (id)
     (children
       (conditional
+        (keyword)
         (javascript)
         (children
           (tag
@@ -91,21 +98,22 @@ Conditional in tag real example
             (buffered_code
               (javascript)))))
       (conditional
+        (keyword)
         (javascript)
         (children
           (tag
             (tag_name)
             (content))))
       (conditional
+        (keyword)
         (children
           (tag
             (tag_name)
             (content)))))))
 
-
-============
+================================================================================
 Conditional in tag real example with multiple indents and blank lines
-============
+================================================================================
 
 #user
   if user.description
@@ -120,13 +128,14 @@ unless user.isAnonymous
 p
 
 
----
+--------------------------------------------------------------------------------
 
 (source_file
   (tag
     (id)
     (children
       (conditional
+        (keyword)
         (javascript)
         (children
           (tag
@@ -136,6 +145,7 @@ p
             (tag_name)
             (content))))))
   (conditional
+    (keyword)
     (javascript)
     (children
       (tag
@@ -147,10 +157,9 @@ p
   (tag
     (tag_name)))
 
-
-============
+================================================================================
 Conditional else following multi-level a element
-============
+================================================================================
 
 tag
   if user.description
@@ -162,13 +171,14 @@ tag
 p
 
 
----
+--------------------------------------------------------------------------------
 
 (source_file
   (tag
     (tag_name)
     (children
       (conditional
+        (keyword)
         (javascript)
         (children
           (tag
@@ -179,6 +189,7 @@ p
                 (tag_name)
                 (content))))))
       (conditional
+        (keyword)
         (javascript)
         (children
           (tag
@@ -186,4 +197,3 @@ p
             (content))))))
   (tag
     (tag_name)))
-
