@@ -1406,7 +1406,7 @@
               "members": [
                 {
                   "type": "PATTERN",
-                  "value": "[^'\"{\\[][^?]+?"
+                  "value": "[^'\"`{\\[][^?]+?"
                 },
                 {
                   "type": "STRING",
@@ -1428,15 +1428,15 @@
                       "members": [
                         {
                           "type": "PATTERN",
-                          "value": "'.*'"
+                          "value": "'(?:[^'\\\\]|\\\\.)*'"
                         },
                         {
                           "type": "PATTERN",
-                          "value": "\".*\""
+                          "value": "\"(?:[^\"\\\\]|\\\\.)*\""
                         },
                         {
                           "type": "PATTERN",
-                          "value": "`.*`"
+                          "value": "`(?:[^`\\\\]|\\\\.)*`"
                         }
                       ]
                     }
@@ -1461,7 +1461,7 @@
           "type": "ALIAS",
           "content": {
             "type": "PATTERN",
-            "value": "[^'\"{\\[][^ ,()]+(\\([^)]*?\\))?"
+            "value": "[^'\"`{\\[][^ ,()]+(\\([^)]*?\\))?"
           },
           "named": true,
           "value": "javascript"
@@ -1514,7 +1514,7 @@
                 },
                 {
                   "type": "PATTERN",
-                  "value": "[^`]*?"
+                  "value": "(?:[^`\\\\]|\\\\.)*"
                 },
                 {
                   "type": "STRING",
@@ -1978,7 +1978,7 @@
                   "type": "ALIAS",
                   "content": {
                     "type": "PATTERN",
-                    "value": "[^']+"
+                    "value": "(?:[^'\\\\]|\\\\.)+"
                   },
                   "named": true,
                   "value": "javascript"
@@ -2008,7 +2008,7 @@
                   "type": "ALIAS",
                   "content": {
                     "type": "PATTERN",
-                    "value": "[^\"]+"
+                    "value": "(?:[^\"\\\\]|\\\\.)+"
                   },
                   "named": true,
                   "value": "javascript"
@@ -2043,7 +2043,7 @@
                   "type": "ALIAS",
                   "content": {
                     "type": "PATTERN",
-                    "value": "[^']+"
+                    "value": "(?:[^'\\\\]|\\\\.)+"
                   },
                   "named": true,
                   "value": "attribute_value"
@@ -2073,7 +2073,7 @@
                   "type": "ALIAS",
                   "content": {
                     "type": "PATTERN",
-                    "value": "[^\"]+"
+                    "value": "(?:[^\"\\\\]|\\\\.)+"
                   },
                   "named": true,
                   "value": "attribute_value"
