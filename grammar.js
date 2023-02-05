@@ -369,15 +369,15 @@ module.exports = grammar({
         alias(
           token(
             seq(
-              /[^'"{\[][^?]+?/,
+              /[^'"`{\[][^?]+?/,
               '?',
               /[^)?]+?/,
               choice(
                 /[^ )]*?/,
                 choice(
-                  /'.*'/,
-                  /".*"/,
-                  /`.*`/,
+                  /'(?:[^'\\]|\\.)*'/,
+                  /"(?:[^"\\]|\\.)*"/,
+                  /`(?:[^`\\]|\\.)*`/,
                 ),
               ),
             )
@@ -391,7 +391,7 @@ module.exports = grammar({
       seq(
         alias(
           // No function calls, nor spaces allowed in javascript attributes
-          /[^'"{\[][^ ,()]+(\([^)]*?\))?/,
+          /[^'"`{\[][^ ,()]+(\([^)]*?\))?/,
           $.javascript
         ),
       ),
@@ -414,7 +414,7 @@ module.exports = grammar({
           token(
             seq(
               "`",
-              /[^`]*?/,
+              /(?:[^`\\]|\\.)*/,
               "`",
             ),
           ),
@@ -547,13 +547,13 @@ module.exports = grammar({
 
     quoted_javascript: ($) =>
       choice(
-        seq("'", optional(alias(/[^']+/, $.javascript)), "'"),
-        seq('"', optional(alias(/[^"]+/, $.javascript)), '"')
+        seq("'", optional(alias(/(?:[^'\\]|\\.)+/, $.javascript)), "'"),
+        seq('"', optional(alias(/(?:[^"\\]|\\.)+/, $.javascript)), '"'),
       ),
     quoted_attribute_value: ($) =>
       choice(
-        seq("'", optional(alias(/[^']+/, $.attribute_value)), "'"),
-        seq('"', optional(alias(/[^"]+/, $.attribute_value)), '"')
+        seq("'", optional(alias(/(?:[^'\\]|\\.)+/, $.attribute_value)), "'"),
+        seq('"', optional(alias(/(?:[^"\\]|\\.)+/, $.attribute_value)), '"'),
       ),
 
     content: () =>

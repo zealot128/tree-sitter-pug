@@ -54,6 +54,22 @@ some-tag(attr, other-attr="test")
       (attribute (attribute_name) (quoted_attribute_value (attribute_value))))))
 
 ========================
+Tag attributes with escaped quotes
+========================
+
+some-tag(attr='test\'test', other-attr="test\"test", template-attr=`test\`test`)
+
+---
+
+(source_file
+  (tag
+    (tag_name)
+    (attributes
+      (attribute (attribute_name) (quoted_attribute_value (attribute_value)))
+      (attribute (attribute_name) (quoted_attribute_value (attribute_value)))
+      (attribute (attribute_name) (javascript)))))
+
+========================
 vue-attribute modifier
 ========================
 
