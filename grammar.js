@@ -40,7 +40,23 @@ module.exports = grammar({
       ),
     ),
     doctype: ($) =>
-      seq("doctype", alias(choice("html", "strict", "xml"), $.doctype_name)),
+      seq(
+        "doctype", 
+        alias(
+          choice(
+            "html", 
+            "strict", 
+            "xml", 
+            "transitional", 
+            "frameset", 
+            "1.1", 
+            "basic", 
+            "mobile", 
+            "plist"
+          ), 
+          $.doctype_name
+        )
+      ),
     pipe: ($) =>
       seq("|", optional($._content_or_javascript), $._newline),
 

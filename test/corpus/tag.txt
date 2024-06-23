@@ -175,10 +175,18 @@ Doctype html
 
 doctype html
 doctype strict
+doctype xml
+doctype mobile
+doctype basic
+doctype plist
 
 ---
 
 (source_file
+  (doctype (doctype_name))
+  (doctype (doctype_name))
+  (doctype (doctype_name))
+  (doctype (doctype_name))
   (doctype (doctype_name))
   (doctype (doctype_name))
 )
