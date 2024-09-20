@@ -1,0 +1,83 @@
+==================
+Inline nested tags
+==================
+
+div Text #[a(href="/link") with a link] inside.
+p This is #[strong emphasized] text with #[em nested #[u tags]] inside.
+
+---
+
+(source_file
+  (tag
+    (tag_name)
+    (content)
+    (inline_nested_tag
+      (tag
+        (tag_name)
+        (attributes
+          (attribute
+            (attribute_name)
+            (quoted_attribute_value
+              (attribute_value))))
+        (content)))
+    (content))
+  (tag
+    (tag_name)
+    (content)
+    (inline_nested_tag
+      (tag
+        (tag_name)
+        (content)))
+    (content)
+    (inline_nested_tag
+      (tag
+        (tag_name)
+        (content)
+        (inline_nested_tag
+          (tag
+            (tag_name)
+            (content)))))
+    (content)))
+
+==================
+Inline nested tags with multiple attributes
+==================
+
+div #[a(href="/link" class="btn") Click here] for more info.
+
+---
+
+(source_file
+  (tag
+    (tag_name)
+    (inline_nested_tag
+      (tag
+        (tag_name)
+        (attributes
+          (attribute
+            (attribute_name)
+            (quoted_attribute_value
+              (attribute_value)))
+          (attribute
+            (attribute_name)
+            (quoted_attribute_value
+              (attribute_value))))
+        (content)))
+    (content)))
+
+==================
+Inline nested tags within attributes
+==================
+
+input(placeholder="#[strong Bold] text")
+
+---
+
+(source_file
+  (tag
+    (tag_name)
+    (attributes
+      (attribute
+        (attribute_name)
+        (quoted_attribute_value
+          (attribute_value))))))
