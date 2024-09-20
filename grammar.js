@@ -5,7 +5,6 @@
 //       where the content of brackets is another instance of the same node. Does treesitter even support this?
 //       The entire node will have to be aliased as $.javascript, this will just make sure no pug is matched too.
 // TODO: don't break if there are singular { or # in content
-// TODO: support #[p(prop)] nested pug syntax
 // TODO: support Angular's weird `let x as first; let y of items` template directive syntax.
 //       documentation here: https://angular.io/guide/structural-directives#structural-directive-syntax-reference
 //       Currently, it is just parsed as $.javascript, but this is not valid javascript, so parsing is broken,
@@ -309,30 +308,39 @@ module.exports = grammar({
         ),
         $._dedent,
       ),
-    tag: ($) =>
+    tag: $ => prec.right(
       seq(
         choice($.tag_name, $.id, $.class),
         optional(repeat1(choice($.id, $.class))),
         optional($.attributes),
         optional(alias('/', $.self_close_slash)),
-        choice(
-          seq(":", $.tag),
-          $._content_after_dot,
-          seq(
-            optional(
-              seq(
-                $._newline,
-                $._indent,
+        optional(
+          choice(
+            prec.right(seq(":", $.tag)),
+            $._content_after_dot,
+            seq(
+              optional(
+                seq(
+                  $._newline,
+                  $._indent,
+                ),
               ),
+              choice($.buffered_code, $.unescaped_buffered_code),
             ),
-            choice($.buffered_code, $.unescaped_buffered_code),
-          ),
-          seq(
-            optional(seq(" ", $._content_or_javascript)),
-            $._newline,
-            optional($.children)
+            seq(
+              optional(seq(" ", $._content_or_javascript)),
+              optional($._newline),
+              optional($.children)
+            )
           )
         )
+      )
+    ),
+    inline_nested_tag: ($) =>
+      seq(
+        '#[',
+        $.tag,
+        ']'
       ),
     _content_after_dot: ($) =>
       seq(
@@ -559,12 +567,14 @@ module.exports = grammar({
     content: () =>
       prec.right(
         repeat1(
-          seq(
-            /[^\n{#]+?/,
-            optional('#'),
-            optional('{')
-          ),
-        ),
+          choice(
+            /[^#\n{\[\]]+/,
+            /#[^\[]?/,
+            /\{[^{]?/,
+            /\[/,
+            /\]/
+          )
+        )
       ),
     _comment_content: () => /[^\n]*/,
     _content_or_javascript: ($) =>
@@ -580,6 +590,7 @@ module.exports = grammar({
             alias($._delimited_javascript, $.javascript),
             "}}"
           ),
+          $.inline_nested_tag,
           $.content
         ),
       ),
