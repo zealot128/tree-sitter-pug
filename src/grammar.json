@@ -112,6 +112,30 @@
               {
                 "type": "STRING",
                 "value": "xml"
+              },
+              {
+                "type": "STRING",
+                "value": "transitional"
+              },
+              {
+                "type": "STRING",
+                "value": "frameset"
+              },
+              {
+                "type": "STRING",
+                "value": "1.1"
+              },
+              {
+                "type": "STRING",
+                "value": "basic"
+              },
+              {
+                "type": "STRING",
+                "value": "mobile"
+              },
+              {
+                "type": "STRING",
+                "value": "plist"
               }
             ]
           },
