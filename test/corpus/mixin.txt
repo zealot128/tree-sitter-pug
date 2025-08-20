@@ -101,3 +101,165 @@ tag
       (javascript)))
   (tag
     (tag_name)))
+
+
+================================================================================
+Mixin use with children and blocks
+================================================================================
+
+mixin modal(title)
+  div.modal-dialog.modal-dialog-centered(role='document')
+    div#modal-content.modal-content
+      div.modal-header
+        h5.modal-title=title
+        button.btn-close(type="button", data-bs-dismiss="modal" aria-label="close")
+      if block
+        block
+
+mixin modal_default_content(test)
+  +modal("")
+    div.modal-body.d-flex.justify-content-center
+      div.spinner-border(role='status')
+        span.visually-hidden Loading...
+    div.modal-footer
+
+mixin modal_container()
+  div#modal.modal.fade.modal-blur(style='display: none', aria-hidden='true', tabindex='-1')
+    +modal_default_content()
+
+mixin modal_sm(title)
+  +modal("TEST")
+    block
+
+
+
+--------------------------------------------------------------------------------
+
+(source_file
+      (mixin_definition
+        (keyword)
+        (mixin_name)
+        (mixin_attributes
+          (attribute_name))
+        (children
+          (tag
+            (tag_name)
+            (class)
+            (class)
+            (attributes
+              (attribute
+                (attribute_name)
+                (quoted_attribute_value
+                  (attribute_value))))
+            (children
+              (tag
+                (tag_name)
+                (id)
+                (class)
+                (children
+                  (tag
+                    (tag_name)
+                    (class)
+                    (children
+                      (tag
+                        (tag_name)
+                        (class)
+                        (buffered_code
+                          (javascript)))
+                      (tag
+                        (tag_name)
+                        (class)
+                        (attributes
+                          (attribute
+                            (attribute_name)
+                            (quoted_attribute_value
+                              (attribute_value)))
+                          (attribute
+                            (attribute_name)
+                            (quoted_attribute_value
+                              (attribute_value)))
+                          (attribute
+                            (attribute_name)
+                            (quoted_attribute_value
+                              (attribute_value)))))))
+                  (conditional
+                    (keyword)
+                    (javascript)
+                    (children
+                      (block_definition
+                        (keyword))))))))))
+      (mixin_definition
+        (keyword)
+        (mixin_name)
+        (mixin_attributes
+          (attribute_name))
+        (children
+          (mixin_use
+            (mixin_name)
+            (attribute
+              (quoted_attribute_value))
+            (children
+              (tag
+                (tag_name)
+                (class)
+                (class)
+                (class)
+                (children
+                  (tag
+                    (tag_name)
+                    (class)
+                    (attributes
+                      (attribute
+                        (attribute_name)
+                        (quoted_attribute_value
+                          (attribute_value))))
+                    (children
+                      (tag
+                        (tag_name)
+                        (class)
+                        (content))))))
+              (tag
+                (tag_name)
+                (class))))))
+      (mixin_definition
+        (keyword)
+        (mixin_name)
+        (mixin_attributes)
+        (children
+          (tag
+            (tag_name)
+            (id)
+            (class)
+            (class)
+            (class)
+            (attributes
+              (attribute
+                (attribute_name)
+                (quoted_attribute_value
+                  (attribute_value)))
+              (attribute
+                (attribute_name)
+                (quoted_attribute_value
+                  (attribute_value)))
+              (attribute
+                (attribute_name)
+                (quoted_attribute_value
+                  (attribute_value))))
+            (children
+              (mixin_use
+                (mixin_name))))))
+      (mixin_definition
+        (keyword)
+        (mixin_name)
+        (mixin_attributes
+          (attribute_name))
+        (children
+          (mixin_use
+            (mixin_name)
+            (attribute
+              (quoted_attribute_value
+                (attribute_value)))
+            (children
+              (block_definition
+                (keyword)))))))
+

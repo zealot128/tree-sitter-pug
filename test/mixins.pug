@@ -1,0 +1,23 @@
+mixin modal(title)
+  div.modal-dialog.modal-dialog-centered(role='document')
+    div#modal-content.modal-content
+      div.modal-header
+        h5.modal-title=title
+        button.btn-close(type="button", data-bs-dismiss="modal" aria-label="close")
+      if block
+        block
+
+mixin modal_default_content(test)
+  +modal("")
+    div.modal-body.d-flex.justify-content-center
+      div.spinner-border(role='status')
+        span.visually-hidden Loading...
+    div.modal-footer
+
+mixin modal_container()
+  div#modal.modal.fade.modal-blur(style='display: none', aria-hidden='true', tabindex='-1')
+    +modal_default_content()
+
+mixin modal_sm(title)
+  +modal("TEST")
+    block

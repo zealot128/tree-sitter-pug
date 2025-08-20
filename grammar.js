@@ -41,19 +41,19 @@ module.exports = grammar({
     ),
     doctype: ($) =>
       seq(
-        "doctype", 
+        "doctype",
         alias(
           choice(
-            "html", 
-            "strict", 
-            "xml", 
-            "transitional", 
-            "frameset", 
-            "1.1", 
-            "basic", 
-            "mobile", 
+            "html",
+            "strict",
+            "xml",
+            "transitional",
+            "frameset",
+            "1.1",
+            "basic",
+            "mobile",
             "plist"
-          ), 
+          ),
           $.doctype_name
         )
       ),
@@ -138,6 +138,8 @@ module.exports = grammar({
             ')',
           ),
         ),
+        $._newline,
+        optional($.children),
       ),
     mixin_definition: ($) =>
       seq(
@@ -179,7 +181,7 @@ module.exports = grammar({
     block_definition: ($) =>
       seq(
         alias('block', $.keyword),
-        $._block_content,
+        choice($._block_content, $._newline),
       ),
     block_append: ($) =>
       seq(
@@ -208,8 +210,8 @@ module.exports = grammar({
           optional(
             alias($.filter_content, $.content),
           ),
+        ),
       ),
-    ),
     filter_name: () => /[\w-]+/,
     filter_content: ($) =>
       choice(
@@ -407,7 +409,7 @@ module.exports = grammar({
       seq(
         alias(
           // No function calls, nor spaces allowed in javascript attributes
-          /[^'"`{\[][^ ,()]+(\([^)]*?\))?/,
+          /[^'"`{\[\)][^ ,()]+(\([^)]*?\))?/,
           $.javascript
         ),
       ),
@@ -450,15 +452,15 @@ module.exports = grammar({
           $.javascript,
         ),
       ),
-      _pug_attributes: ($) =>
-        choice(
-          $._string_attribute_value,
-          $._ternary_attribute_value,
-          $._variable_attribute_value,
-          $._array_attribute_value,
-          $._object_attribute_value,
-          $._template_attribute_value,
-        ),
+    _pug_attributes: ($) =>
+      choice(
+        $._string_attribute_value,
+        $._ternary_attribute_value,
+        $._variable_attribute_value,
+        $._array_attribute_value,
+        $._object_attribute_value,
+        $._template_attribute_value,
+      ),
     _attribute: ($) =>
       seq(
         $.attribute_name,
@@ -505,6 +507,7 @@ module.exports = grammar({
           $.each,
           $.while,
           $.include,
+          $.mixin_use,
           $._newline,
         ),
       ),
