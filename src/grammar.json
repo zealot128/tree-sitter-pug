@@ -1,4 +1,5 @@
 {
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/grammar.schema.json",
   "name": "pug",
   "rules": {
     "source_file": {
@@ -448,6 +449,22 @@
               "type": "BLANK"
             }
           ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_newline"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "children"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         }
       ]
     },
@@ -602,8 +619,17 @@
           "value": "keyword"
         },
         {
-          "type": "SYMBOL",
-          "name": "_block_content"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_block_content"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_newline"
+            }
+          ]
         }
       ]
     },
@@ -1485,7 +1511,7 @@
           "type": "ALIAS",
           "content": {
             "type": "PATTERN",
-            "value": "[^'\"`{\\[][^ ,()]+(\\([^)]*?\\))?"
+            "value": "[^'\"`{\\[\\)][^ ,()]+(\\([^)]*?\\))?"
           },
           "named": true,
           "value": "javascript"
@@ -1817,6 +1843,10 @@
           },
           {
             "type": "SYMBOL",
+            "name": "mixin_use"
+          },
+          {
+            "type": "SYMBOL",
             "name": "_newline"
           }
         ]
@@ -1954,7 +1984,8 @@
     },
     "class": {
       "type": "PATTERN",
-      "value": "\\.[_a-z0-9\\-]*[_a-zA-Z][_a-zA-Z0-9\\-]*"
+      "value": "\\.[_a-z0-9\\-]*[_a-zA-Z][_a-zA-Z0-9\\-]*",
+      "flags": "i"
     },
     "id": {
       "type": "PATTERN",
@@ -2411,6 +2442,6 @@
     }
   ],
   "inline": [],
-  "supertypes": []
+  "supertypes": [],
+  "reserved": {}
 }
-

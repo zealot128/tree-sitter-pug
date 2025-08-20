@@ -226,6 +226,10 @@
           "named": true
         },
         {
+          "type": "mixin_use",
+          "named": true
+        },
+        {
           "type": "pipe",
           "named": true
         },
@@ -515,6 +519,10 @@
           "named": true
         },
         {
+          "type": "children",
+          "named": true
+        },
+        {
           "type": "mixin_name",
           "named": true
         }
@@ -588,6 +596,7 @@
   {
     "type": "source_file",
     "named": true,
+    "root": true,
     "fields": {},
     "children": {
       "multiple": true,
